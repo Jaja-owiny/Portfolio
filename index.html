@@ -2,11 +2,12 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Jason Ocholla | Senior Software & Web Engineer</title>
   
   <!-- SEO Tags -->
   <meta name="description" content="Immersive website portfolio of Jason Ocholla, a specialist in advanced software development, 3D web experiences, and high-performance applications.">
+  <meta name="theme-color" content="#030303">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +55,14 @@
               '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
               '50%': { opacity: 0.6, transform: 'scale(1.05)' },
             }
+          },
+          screens: {
+            'xs': '375px',
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
           }
         }
       }
@@ -80,19 +89,21 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #e5c158;
     }
-
+    
     body {
       background-color: #030303;
       color: #f8fafc;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-
+    
     /* Webkit selection */
     ::selection {
       background: rgba(229, 193, 88, 0.3);
       color: #e5c158;
     }
-
+    
     /* Glassmorphism Class */
     .glass {
       background: rgba(10, 10, 15, 0.7);
@@ -107,8 +118,8 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(229, 193, 88, 0.15);
     }
-
-    /* Custom Cursor */
+    
+    /* Custom Cursor - Desktop only */
     #custom-cursor {
       width: 24px;
       height: 24px;
@@ -132,7 +143,17 @@
       pointer-events: none;
       z-index: 10000;
     }
-
+    
+    .cursor-desktop {
+      display: none;
+    }
+    
+    @media (hover: hover) and (pointer: fine) {
+      .cursor-desktop {
+        display: block;
+      }
+    }
+    
     /* Luxury Golden Glow */
     .gold-glow {
       box-shadow: 0 0 30px rgba(229, 193, 88, 0.15);
@@ -140,7 +161,7 @@
     .purple-glow {
       box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
     }
-
+    
     /* 3D WebGL Canvas Layer */
     #webgl-canvas {
       position: fixed;
@@ -151,13 +172,13 @@
       z-index: 0;
       pointer-events: none;
     }
-
+    
     /* Content layers above WebGL canvas */
     .content-wrapper {
       position: relative;
       z-index: 10;
     }
-
+    
     /* Text reveal stroke effect */
     .text-stroke {
       -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
@@ -183,13 +204,38 @@
     .magnetic-wrap {
       display: inline-block;
     }
+    
+    /* Touch-friendly magnetic buttons on mobile */
+    @media (hover: none) and (pointer: coarse) {
+      .magnetic-btn {
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Mobile-specific optimizations */
+    @media (max-width: 767px) {
+      .mobile-section-padding {
+        padding-top: calc(calc(32 / 16) * 1rem);
+        padding-bottom: calc(calc(32 / 16) * 1rem);
+      }
+    }
   </style>
 </head>
 <body class="font-sans selection:bg-luxury-gold/30 selection:text-luxury-gold antialiased leading-relaxed">
 
-  <!-- Custom Cursor Elements -->
-  <div id="custom-cursor" class="hidden md:block"></div>
-  <div id="custom-cursor-dot" class="hidden md:block"></div>
+  <!-- Custom Cursor Elements - Desktop only -->
+  <div id="custom-cursor" class="cursor-desktop"></div>
+  <div id="custom-cursor-dot" class="cursor-desktop"></div>
 
   <!-- Background 3D WebGL Canvas -->
   <canvas id="webgl-canvas"></canvas>
@@ -205,22 +251,22 @@
   <div class="content-wrapper">
 
     <!-- Header Navigation -->
-    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-6 px-6 md:px-12">
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4 px-4 md:py-6 md:px-12 safe-area-inset">
       <nav class="max-w-7xl mx-auto flex items-center justify-between">
         <!-- Logo -->
-        <a href="#hero" class="group flex items-center space-x-2">
-          <span class="font-display text-2xl font-bold tracking-wider text-white transition-colors duration-300 group-hover:text-luxury-gold">
+        <a href="#hero" class="group flex items-center space-x-2 touch-manipulation">
+          <span class="font-display text-xl md:text-2xl font-bold tracking-wider text-white transition-colors duration-300 group-hover:text-luxury-gold">
             J<span class="text-luxury-gold group-hover:text-white">.</span>OCHOLLA
           </span>
         </a>
 
         <!-- Desktop Navigation Items -->
         <div class="hidden md:flex items-center space-x-1 glass px-6 py-2 rounded-full border border-white/5 backdrop-blur-md">
-          <a href="#about" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300">About</a>
-          <a href="#skills" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300">Skills</a>
-          <a href="#projects" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300">Work</a>
-          <a href="#experience" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300">Journey</a>
-          <a href="#terminal" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300">Console</a>
+          <a href="#about" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300 touch-manipulation">About</a>
+          <a href="#skills" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300 touch-manipulation">Skills</a>
+          <a href="#projects" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300 touch-manipulation">Work</a>
+          <a href="#experience" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300 touch-manipulation">Journey</a>
+          <a href="#terminal" class="nav-link text-xs uppercase tracking-widest font-heading font-medium text-slate-300 hover:text-luxury-gold px-4 py-2 transition-all duration-300 touch-manipulation">Console</a>
         </div>
 
         <!-- Right Side CTA: Status & Button -->
@@ -231,27 +277,27 @@
           </div>
           
           <div class="magnetic-wrap">
-            <a href="#contact" class="magnetic-btn glass-gold text-xs uppercase tracking-widest font-heading font-semibold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 px-5 py-2.5 rounded-full shadow-lg">
+            <a href="#contact" class="magnetic-btn glass-gold text-xs uppercase tracking-widest font-heading font-semibold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-black transition-all duration-300 px-4 md:px-5 py-2 md:py-2.5 rounded-full shadow-lg touch-manipulation">
               Get in Touch
             </a>
           </div>
 
           <!-- Mobile Menu Trigger -->
-          <button id="menu-toggle" class="md:hidden text-white hover:text-luxury-gold focus:outline-none p-2" aria-label="Toggle menu">
+          <button id="menu-toggle" class="md:hidden text-white hover:text-luxury-gold focus:outline-none p-2 touch-manipulation" aria-label="Toggle menu" aria-expanded="false">
             <i data-lucide="menu" class="w-6 h-6"></i>
           </button>
         </div>
       </nav>
 
       <!-- Mobile Navigation Drawer -->
-      <div id="mobile-menu" class="fixed inset-0 top-[88px] w-full h-[calc(100vh-88px)] glass z-40 hidden flex-col justify-between p-8 border-t border-white/5 transform translate-x-full transition-transform duration-500">
+      <div id="mobile-menu" class="fixed inset-0 top-[88px] w-full h-[calc(100vh-88px)] glass z-40 hidden flex-col justify-between p-8 border-t border-white/5 transform translate-x-full transition-transform duration-500" role="navigation" aria-label="Mobile navigation">
         <div class="flex flex-col space-y-6">
-          <a href="#about" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors">About</a>
-          <a href="#skills" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors">Skills</a>
-          <a href="#projects" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors">Work</a>
-          <a href="#experience" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors">Journey</a>
-          <a href="#terminal" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors">Console</a>
-          <a href="#contact" class="mobile-nav-link text-2xl font-heading font-medium text-luxury-gold hover:text-white transition-colors">Contact</a>
+          <a href="#about" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors touch-manipulation">About</a>
+          <a href="#skills" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors touch-manipulation">Skills</a>
+          <a href="#projects" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors touch-manipulation">Work</a>
+          <a href="#experience" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors touch-manipulation">Journey</a>
+          <a href="#terminal" class="mobile-nav-link text-2xl font-heading font-medium text-white hover:text-luxury-gold transition-colors touch-manipulation">Console</a>
+          <a href="#contact" class="mobile-nav-link text-2xl font-heading font-medium text-luxury-gold hover:text-white transition-colors touch-manipulation">Contact</a>
         </div>
         <div class="flex flex-col space-y-4">
           <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400">
@@ -259,9 +305,9 @@
             <span>Remote / Globally Available</span>
           </div>
           <div class="flex space-x-4">
-            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
-            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors touch-manipulation"><i data-lucide="github" class="w-5 h-5"></i></a>
+            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors touch-manipulation"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+            <a href="#" class="text-slate-400 hover:text-luxury-gold transition-colors touch-manipulation"><i data-lucide="twitter" class="w-5 h-5"></i></a>
           </div>
         </div>
       </div>
@@ -269,7 +315,7 @@
 
 
     <!-- 1. Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative px-6 md:px-12 pt-24 overflow-hidden">
+    <section id="hero" class="min-h-screen flex items-center justify-center relative px-6 md:px-12 pt-20 md:pt-24 overflow-hidden">
       <!-- Grid overlay background for depth -->
       <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293708_1px,transparent_1px),linear-gradient(to_bottom,#1f293708_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0"></div>
 
@@ -282,25 +328,25 @@
         </div>
 
         <!-- Big Display Header -->
-        <h1 class="hero-reveal font-display text-5xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-[0.9] text-white opacity-0 translate-y-8 select-none">
-          JASON<br class="hidden md:block">
+        <h1 class="hero-reveal font-display text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-[0.9] text-white opacity-0 translate-y-8 select-none">
+          JASON<br class="hidden sm:block">
           <span class="text-stroke-gold hover:text-luxury-gold transition-colors duration-500 cursor-default">OCHOLLA</span>
         </h1>
 
         <!-- Short Subtitle -->
-        <p class="hero-reveal max-w-xl text-base md:text-lg text-slate-400 font-light mt-8 leading-relaxed opacity-0 translate-y-8">
+        <p class="hero-reveal max-w-xl text-sm sm:text-base md:text-lg text-slate-400 font-light mt-6 md:mt-8 leading-relaxed opacity-0 translate-y-8 px-2 md:px-0">
           Engineering award-winning digital experiences. Merging bleeding-edge <span class="text-white font-medium">software engineering</span> with immersive <span class="text-luxury-gold font-medium">3D web technologies</span> to craft unforgettable user journeys.
         </p>
 
         <!-- CTAs -->
-        <div class="hero-reveal flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mt-10 w-full sm:w-auto opacity-0 translate-y-8">
+        <div class="hero-reveal flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mt-8 md:mt-10 w-full sm:w-auto opacity-0 translate-y-8 px-4 sm:px-0">
           <div class="magnetic-wrap w-full sm:w-auto">
-            <a href="#projects" class="magnetic-btn w-full sm:w-auto text-center inline-block px-8 py-4 bg-luxury-gold text-luxury-black font-heading font-semibold uppercase tracking-wider text-xs rounded-full shadow-lg shadow-amber-950/20 hover:bg-white hover:text-luxury-black transition-all duration-300 hover:-translate-y-0.5">
+            <a href="#projects" class="magnetic-btn w-full sm:w-auto text-center inline-block px-6 sm:px-8 py-3 sm:py-4 bg-luxury-gold text-luxury-black font-heading font-semibold uppercase tracking-wider text-xs rounded-full shadow-lg shadow-amber-950/20 hover:bg-white hover:text-luxury-black transition-all duration-300 touch-manipulation">
               Explore Portfolio
             </a>
           </div>
           <div class="magnetic-wrap w-full sm:w-auto">
-            <a href="#about" class="magnetic-btn w-full sm:w-auto text-center inline-block px-8 py-4 glass text-white font-heading font-semibold uppercase tracking-wider text-xs rounded-full hover:bg-white/5 transition-all duration-300">
+            <a href="#about" class="magnetic-btn w-full sm:w-auto text-center inline-block px-6 sm:px-8 py-3 sm:py-4 glass text-white font-heading font-semibold uppercase tracking-wider text-xs rounded-full hover:bg-white/5 transition-all duration-300 touch-manipulation">
               Read My Philosophy
             </a>
           </div>
@@ -308,8 +354,8 @@
       </div>
 
       <!-- Scroll Down Indicator -->
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 opacity-75">
-        <span class="text-[9px] font-mono tracking-[0.3em] text-slate-500 uppercase mb-2">Scroll Down</span>
+      <div class="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 opacity-75">
+        <span class="text-[9px] font-mono tracking-[0.3em] text-slate-500 uppercase mb-2 hidden sm:block">Scroll Down</span>
         <div class="w-5 h-8 border border-slate-600 rounded-full flex justify-center p-1.5">
           <div class="w-1 h-2 bg-luxury-gold rounded-full animate-bounce"></div>
         </div>
@@ -318,20 +364,20 @@
 
 
     <!-- 2. About & Philosophy Section -->
-    <section id="about" class="py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-black/90">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+    <section id="about" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-black/90">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         <!-- Text Content -->
-        <div class="lg:col-span-7 flex flex-col space-y-8">
+        <div class="lg:col-span-7 flex flex-col space-y-6 md:space-y-8">
           <div class="flex items-center space-x-3">
-            <span class="h-[1px] w-8 bg-luxury-gold"></span>
+            <span class="h-[1px] w-6 md:w-8 bg-luxury-gold"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Who Am I</span>
           </div>
           
-          <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+          <h2 class="font-heading text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
             I build software that balances <span class="text-luxury-gold">technical precision</span> with <span class="italic text-stroke font-semibold">creative expression</span>.
           </h2>
           
-          <div class="space-y-6 text-slate-400 font-light text-base md:text-lg">
+          <div class="space-y-6 text-slate-400 font-light text-sm sm:text-base md:text-lg">
             <p>
               As a dedicated developer specializing in modern web ecosystems and enterprise software engineering, I view code as a medium to create immersive experiences rather than just functional systems.
             </p>
@@ -344,49 +390,49 @@
           </div>
 
           <!-- Highlight metrics -->
-          <div class="grid grid-cols-3 gap-6 pt-6 border-t border-white/5">
-            <div>
-              <p class="font-display text-3xl md:text-4xl font-extrabold text-white">5+</p>
-              <p class="text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Years of Experience</p>
+          <div class="grid grid-cols-3 gap-4 md:gap-6 pt-6 border-t border-white/5">
+            <div class="text-center sm:text-left">
+              <p class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">5+</p>
+              <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Years of Experience</p>
             </div>
-            <div>
-              <p class="font-display text-3xl md:text-4xl font-extrabold text-luxury-gold">40+</p>
-              <p class="text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Projects Completed</p>
+            <div class="text-center sm:text-left">
+              <p class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-luxury-gold">40+</p>
+              <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Projects Completed</p>
             </div>
-            <div>
-              <p class="font-display text-3xl md:text-4xl font-extrabold text-white">99%</p>
-              <p class="text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Client Satisfaction</p>
+            <div class="text-center sm:text-left">
+              <p class="font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">99%</p>
+              <p class="text-[10px] sm:text-xs uppercase tracking-wider text-slate-500 font-medium mt-1">Client Satisfaction</p>
             </div>
           </div>
         </div>
 
         <!-- 3D Graphic / Interactive Card -->
-        <div class="lg:col-span-5 relative">
+        <div class="lg:col-span-5 relative mt-12 lg:mt-0">
           <!-- Glassmorphic Card -->
-          <div class="glass-gold rounded-2xl p-8 relative z-10 flex flex-col space-y-6 gold-glow transition-all duration-500 hover:-translate-y-2">
+          <div class="glass-gold rounded-2xl p-6 md:p-8 relative z-10 flex flex-col space-y-6 gold-glow transition-all duration-500 hover:-translate-y-2">
             <!-- Header with light controls -->
             <div class="flex items-center justify-between">
               <div class="flex items-center space-x-1.5">
-                <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
-                <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+                <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80"></span>
+                <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80"></span>
+                <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80"></span>
               </div>
-              <span class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Core Values</span>
+              <span class="text-[9px] sm:text-[10px] font-mono text-slate-500 uppercase tracking-widest">Core Values</span>
             </div>
 
             <!-- Profile image block -->
-            <div class="h-64 rounded-xl overflow-hidden relative group">
+            <div class="h-56 sm:h-64 rounded-xl overflow-hidden relative group">
               <!-- Grid pattern inside card -->
               <div class="absolute inset-0 bg-zinc-950/80 mix-blend-overlay z-10"></div>
               <div class="absolute inset-0 bg-[linear-gradient(to_right,#e5c15808_1px,transparent_1px),linear-gradient(to_bottom,#e5c15808_1px,transparent_1px)] bg-[size:1rem_1rem] z-10"></div>
               <!-- Floating metallic 3D abstract sphere in container -->
               <div class="absolute inset-0 flex items-center justify-center z-20">
-                <div class="w-32 h-32 rounded-full border border-luxury-gold/30 bg-gradient-to-tr from-indigo-950/40 via-luxury-black/80 to-amber-950/40 flex items-center justify-center relative animate-spin-slow">
+                <div class="w-24 sm:w-32 h-24 sm:h-32 rounded-full border border-luxury-gold/30 bg-gradient-to-tr from-indigo-950/40 via-luxury-black/80 to-amber-950/40 flex items-center justify-center relative animate-spin-slow">
                   <!-- Orbit ring -->
                   <div class="absolute inset-0 border border-dashed border-luxury-silver/20 rounded-full scale-110"></div>
-                  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-luxury-gold"></div>
+                  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-luxury-gold"></div>
                   <!-- Inner details -->
-                  <i data-lucide="cpu" class="w-10 h-10 text-luxury-gold animate-bounce"></i>
+                  <i data-lucide="cpu" class="w-8 sm:w-10 h-8 sm:h-10 text-luxury-gold animate-bounce"></i>
                 </div>
               </div>
             </div>
@@ -394,21 +440,21 @@
             <!-- Content list -->
             <div class="space-y-4">
               <div class="flex items-start space-x-3">
-                <i data-lucide="zap" class="w-5 h-5 text-luxury-gold mt-0.5 shrink-0"></i>
+                <i data-lucide="zap" class="w-4 sm:w-5 h-4 sm:h-5 text-luxury-gold mt-0.5 shrink-0"></i>
                 <div>
                   <h4 class="text-sm font-heading font-semibold text-white">Performance Optimization</h4>
                   <p class="text-xs text-slate-500 mt-0.5">Aiming for 60FPS visuals & sub-100ms API response rates.</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
-                <i data-lucide="shield-check" class="w-5 h-5 text-luxury-gold mt-0.5 shrink-0"></i>
+                <i data-lucide="shield-check" class="w-4 sm:w-5 h-4 sm:h-5 text-luxury-gold mt-0.5 shrink-0"></i>
                 <div>
                   <h4 class="text-sm font-heading font-semibold text-white">Bulletproof Security</h4>
                   <p class="text-xs text-slate-500 mt-0.5">Implementing secure authorization, encryption, and secure coding patterns.</p>
                 </div>
               </div>
               <div class="flex items-start space-x-3">
-                <i data-lucide="layout" class="w-5 h-5 text-luxury-gold mt-0.5 shrink-0"></i>
+                <i data-lucide="layout" class="w-4 sm:w-5 h-4 sm:h-5 text-luxury-gold mt-0.5 shrink-0"></i>
                 <div>
                   <h4 class="text-sm font-heading font-semibold text-white">Immersive Layouts</h4>
                   <p class="text-xs text-slate-500 mt-0.5">Fusing fluid micro-interactions with majestic parallax structures.</p>
@@ -418,48 +464,48 @@
           </div>
           
           <!-- Decorative geometric shapes behind -->
-          <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full border border-white/5 animate-spin-slow pointer-events-none"></div>
-          <div class="absolute -bottom-12 -left-12 w-64 h-64 rounded-full border border-dashed border-luxury-gold/5 animate-spin-slow pointer-events-none" style="animation-duration: 40s;"></div>
+          <div class="absolute -top-10 -right-10 w-40 sm:w-48 h-40 sm:h-48 rounded-full border border-white/5 animate-spin-slow pointer-events-none"></div>
+          <div class="absolute -bottom-10 -left-10 sm:-bottom-12 sm:-left-12 w-52 sm:w-64 h-52 sm:h-64 rounded-full border border-dashed border-luxury-gold/5 animate-spin-slow pointer-events-none" style="animation-duration: 40s;"></div>
         </div>
       </div>
     </section>
 
 
     <!-- 3. Skills Interactive Orbit / Grid -->
-    <section id="skills" class="py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-b border-white/5">
+    <section id="skills" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-b border-white/5">
       <div class="max-w-7xl mx-auto relative z-10">
         <!-- Section Header -->
-        <div class="flex flex-col items-center text-center mb-20">
+        <div class="flex flex-col items-center text-center mb-12 md:mb-20">
           <div class="flex items-center space-x-3 mb-4">
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Competence Architecture</span>
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
           </div>
-          <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">
+          <h2 class="font-heading text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 md:mb-6">
             Technical Stack & Capabilities
           </h2>
-          <p class="max-w-xl text-sm md:text-base text-slate-400 font-light">
+          <p class="max-w-xl text-xs sm:text-sm md:text-base text-slate-400 font-light px-4 md:px-0">
             I design and maintain modular applications, leveraging highly integrated frameworks to engineer robust software solutions.
           </p>
         </div>
 
-        <!-- Skills Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Skills Grid - Mobile: single column, Tablet: 2 cols, Desktop: 4 cols -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           
           <!-- Skill Card 1: Frontend -->
-          <div class="skill-card glass hover:glass-gold rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default">
-            <div class="absolute -top-10 -right-10 w-24 h-24 bg-indigo-950/30 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
+          <div class="skill-card glass hover:glass-gold rounded-xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default touch-manipulation">
+            <div class="absolute -top-8 -right-8 w-20 h-20 bg-indigo-950/30 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
             
-            <div class="flex items-center justify-between mb-8">
-              <div class="w-12 h-12 rounded-lg bg-indigo-950/50 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
-                <i data-lucide="monitor" class="w-6 h-6"></i>
+            <div class="flex items-center justify-between mb-6 md:mb-8">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-indigo-950/50 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
+                <i data-lucide="monitor" class="w-5 h-5 md:w-6 md:h-6"></i>
               </div>
-              <span class="text-[10px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">01 / FRONTEND</span>
+              <span class="text-[9px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">01 / FRONTEND</span>
             </div>
             
-            <h3 class="font-heading text-lg font-semibold text-white mb-4">Frontend Craftsmanship</h3>
+            <h3 class="font-heading text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Frontend Craftsmanship</h3>
             
-            <ul class="space-y-2.5 text-sm text-slate-400 font-light mb-8">
+            <ul class="space-y-2 text-xs md:text-sm text-slate-400 font-light mb-6 md:mb-8">
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>React / Next.js / Vite</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>TypeScript & ES6+ Javascript</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Three.js / WebGL / GLSL</span></li>
@@ -467,26 +513,26 @@
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Tailwind CSS & Utility Frameworks</span></li>
             </ul>
 
-            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500 group-hover:text-white transition-colors">
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500 group-hover:text-white transition-colors">
               <span>Dominance</span>
               <span class="text-luxury-gold">95%</span>
             </div>
           </div>
 
           <!-- Skill Card 2: Backend -->
-          <div class="skill-card glass hover:glass-gold rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default">
-            <div class="absolute -top-10 -right-10 w-24 h-24 bg-amber-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
+          <div class="skill-card glass hover:glass-gold rounded-xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default touch-manipulation">
+            <div class="absolute -top-8 -right-8 w-20 h-20 bg-amber-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
             
-            <div class="flex items-center justify-between mb-8">
-              <div class="w-12 h-12 rounded-lg bg-amber-950/40 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
-                <i data-lucide="server" class="w-6 h-6"></i>
+            <div class="flex items-center justify-between mb-6 md:mb-8">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-amber-950/40 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
+                <i data-lucide="server" class="w-5 h-5 md:w-6 md:h-6"></i>
               </div>
-              <span class="text-[10px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">02 / BACKEND</span>
+              <span class="text-[9px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">02 / BACKEND</span>
             </div>
             
-            <h3 class="font-heading text-lg font-semibold text-white mb-4">Backend Architecture</h3>
+            <h3 class="font-heading text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Backend Architecture</h3>
             
-            <ul class="space-y-2.5 text-sm text-slate-400 font-light mb-8">
+            <ul class="space-y-2 text-xs md:text-sm text-slate-400 font-light mb-6 md:mb-8">
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Python (FastAPI / Django / Flask)</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>RESTful & GraphQL API Design</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Node.js / Express / NestJS</span></li>
@@ -494,26 +540,26 @@
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Redis Caching & Key-Value DBs</span></li>
             </ul>
 
-            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500 group-hover:text-white transition-colors">
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500 group-hover:text-white transition-colors">
               <span>Dominance</span>
               <span class="text-luxury-gold">90%</span>
             </div>
           </div>
 
           <!-- Skill Card 3: Systems & DevOps -->
-          <div class="skill-card glass hover:glass-gold rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default">
-            <div class="absolute -top-10 -right-10 w-24 h-24 bg-purple-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
+          <div class="skill-card glass hover:glass-gold rounded-xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default touch-manipulation">
+            <div class="absolute -top-8 -right-8 w-20 h-20 bg-purple-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
             
-            <div class="flex items-center justify-between mb-8">
-              <div class="w-12 h-12 rounded-lg bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
-                <i data-lucide="cloud" class="w-6 h-6"></i>
+            <div class="flex items-center justify-between mb-6 md:mb-8">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-purple-950/40 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
+                <i data-lucide="cloud" class="w-5 h-5 md:w-6 md:h-6"></i>
               </div>
-              <span class="text-[10px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">03 / DEVOPS</span>
+              <span class="text-[9px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">03 / DEVOPS</span>
             </div>
             
-            <h3 class="font-heading text-lg font-semibold text-white mb-4">Systems & Infrastructure</h3>
+            <h3 class="font-heading text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Systems & Infrastructure</h3>
             
-            <ul class="space-y-2.5 text-sm text-slate-400 font-light mb-8">
+            <ul class="space-y-2 text-xs md:text-sm text-slate-400 font-light mb-6 md:mb-8">
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Docker Containerization</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>CI/CD Pipelines (GitHub Actions / GitLab)</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>AWS / GCP Cloud Management</span></li>
@@ -521,26 +567,26 @@
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Kubernetes Orchestration (Basic)</span></li>
             </ul>
 
-            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500 group-hover:text-white transition-colors">
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500 group-hover:text-white transition-colors">
               <span>Dominance</span>
               <span class="text-luxury-gold">85%</span>
             </div>
           </div>
 
           <!-- Skill Card 4: Quantitative & Trading -->
-          <div class="skill-card glass hover:glass-gold rounded-xl p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default">
-            <div class="absolute -top-10 -right-10 w-24 h-24 bg-emerald-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
+          <div class="skill-card glass hover:glass-gold rounded-xl p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden cursor-default touch-manipulation">
+            <div class="absolute -top-8 -right-8 w-20 h-20 bg-emerald-950/20 rounded-full blur-xl group-hover:bg-luxury-gold/10 transition-colors duration-500"></div>
             
-            <div class="flex items-center justify-between mb-8">
-              <div class="w-12 h-12 rounded-lg bg-emerald-950/40 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
-                <i data-lucide="trending-up" class="w-6 h-6"></i>
+            <div class="flex items-center justify-between mb-6 md:mb-8">
+              <div class="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-emerald-950/40 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:text-luxury-gold group-hover:border-luxury-gold/30 transition-colors">
+                <i data-lucide="trending-up" class="w-5 h-5 md:w-6 md:h-6"></i>
               </div>
-              <span class="text-[10px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">04 / ALGORITHMIC</span>
+              <span class="text-[9px] font-mono text-slate-500 font-medium group-hover:text-luxury-gold/80">04 / ALGORITHMIC</span>
             </div>
             
-            <h3 class="font-heading text-lg font-semibold text-white mb-4">Quantitative & MQL5</h3>
+            <h3 class="font-heading text-base md:text-lg font-semibold text-white mb-3 md:mb-4">Quantitative & MQL5</h3>
             
-            <ul class="space-y-2.5 text-sm text-slate-400 font-light mb-8">
+            <ul class="space-y-2 text-xs md:text-sm text-slate-400 font-light mb-6 md:mb-8">
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>MQL5 (EAs, Indicators, Trade Panels)</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>MT5 Integration (Python Bridge API)</span></li>
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>Tick-by-tick Data & Backtesting</span></li>
@@ -548,7 +594,7 @@
               <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 rounded-full bg-luxury-gold"></span><span>WebSockets & Real-time Feeds</span></li>
             </ul>
 
-            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-xs font-mono text-slate-500 group-hover:text-white transition-colors">
+            <div class="pt-4 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-500 group-hover:text-white transition-colors">
               <span>Dominance</span>
               <span class="text-luxury-gold">88%</span>
             </div>
@@ -559,15 +605,15 @@
     </section>
 
 
-    <!-- 4. Projects Showcase (HORIZONTAL SCROLLING EXPERIENCE) -->
+    <!-- 4. Projects Showcase (Responsive Stack on Mobile, Horizontal on Desktop) -->
     <section id="projects" class="relative overflow-hidden bg-luxury-black">
       
-      <!-- Inner Scroll Container (Will be controlled by GSAP ScrollTrigger) -->
-      <div class="horizontal-outer w-full">
+      <!-- Desktop: Horizontal Scroll Container -->
+      <div class="hidden md:block horizontal-outer w-full">
         <div id="projects-pin-container" class="relative h-screen flex items-center">
           
-          <!-- Static Title/Intro Card (Always Visible on Side at Start) -->
-          <div id="projects-track" class="flex flex-row flex-nowrap items-center px-12 md:px-24 space-x-12 md:space-x-24 absolute left-0 top-0 h-full py-20" style="will-change: transform;">
+          <!-- Static Title/Intro Card -->
+          <div id="projects-track" class="flex flex-row flex-nowrap items-center px-12 md:px-24 space-x-12 md:space-x-24 absolute left-0 top-0 h-full py-16" style="will-change: transform;">
             
             <!-- Left Header Banner Card -->
             <div class="w-[85vw] md:w-[45vw] shrink-0 flex flex-col justify-center h-full space-y-6">
@@ -575,7 +621,7 @@
                 <span class="h-[1px] w-8 bg-luxury-gold"></span>
                 <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Curated Portfolio</span>
               </div>
-              <h2 class="font-display text-4xl md:text-7xl font-extrabold text-white leading-none">
+              <h2 class="font-display text-3xl md:text-7xl font-extrabold text-white leading-none">
                 SELECTED<br>
                 <span class="text-stroke-gold text-luxury-gold font-bold">PROJECTS</span>
               </h2>
@@ -588,8 +634,8 @@
               </div>
             </div>
 
-            <!-- Project 1: DeFi Core Analytics (Luxury card) -->
-            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow">
+            <!-- Project 1: DeFi Core Analytics -->
+            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[60vh] md:h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow touch-manipulation">
               <div class="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-10 group-hover:opacity-20 group-hover:mix-blend-normal transition-all duration-700" style="background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80');"></div>
               
               <div class="flex items-center justify-between relative z-10">
@@ -601,22 +647,22 @@
               </div>
               
               <div class="relative z-10 pt-20">
-                <h3 class="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">Aether DeFi</h3>
+                <h3 class="font-heading text-xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">Aether DeFi</h3>
                 <p class="text-xs md:text-sm text-slate-400 font-light mt-3">
                   A high-throughput decentralized finance dashboard displaying real-time pool metrics, gas pricing algorithms, and trading analysis. Scaled to handle live WebSocket feeds from multiple blockchain nodes simultaneously.
                 </p>
               </div>
 
-              <div class="flex items-center justify-between pt-8 border-t border-white/5 relative z-10">
+              <div class="flex items-center justify-between pt-6 md:pt-8 border-t border-white/5 relative z-10">
                 <span class="text-[10px] font-mono text-slate-500">Core Architecture / Frontend</span>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300">
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300 touch-manipulation">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                 </a>
               </div>
             </div>
 
-            <!-- Project 2: MT5 Trade Terminal (MQL5) -->
-            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow">
+            <!-- Project 2: MT5 Trade Terminal -->
+            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[60vh] md:h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow touch-manipulation">
               <div class="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-10 group-hover:opacity-20 group-hover:mix-blend-normal transition-all duration-700" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80');"></div>
               
               <div class="flex items-center justify-between relative z-10">
@@ -628,22 +674,22 @@
               </div>
               
               <div class="relative z-10 pt-20">
-                <h3 class="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">Valkyrie MT5 EA</h3>
+                <h3 class="font-heading text-xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">Valkyrie MT5 EA</h3>
                 <p class="text-xs md:text-sm text-slate-400 font-light mt-3">
                   An advanced algorithmic trading engine written in C++-like MQL5 and Python. Employs machine learning-based volatility prediction models to guide risk allocation and dynamic stop-loss adjustments over currency pairs.
                 </p>
               </div>
 
-              <div class="flex items-center justify-between pt-8 border-t border-white/5 relative z-10">
+              <div class="flex items-center justify-between pt-6 md:pt-8 border-t border-white/5 relative z-10">
                 <span class="text-[10px] font-mono text-slate-500">MQL5 Core & Statistical Backend</span>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300">
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300 touch-manipulation">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                 </a>
               </div>
             </div>
 
             <!-- Project 3: AI Code Engine -->
-            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow">
+            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[60vh] md:h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow touch-manipulation">
               <div class="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-10 group-hover:opacity-20 group-hover:mix-blend-normal transition-all duration-700" style="background-image: url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=800&q=80');"></div>
               
               <div class="flex items-center justify-between relative z-10">
@@ -655,22 +701,22 @@
               </div>
               
               <div class="relative z-10 pt-20">
-                <h3 class="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">SyntaxForge AI</h3>
+                <h3 class="font-heading text-xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">SyntaxForge AI</h3>
                 <p class="text-xs md:text-sm text-slate-400 font-light mt-3">
                   A high-performance local AI code suggestion editor backend utilizing fine-tuned small language models. Built to interface with desktop extensions, achieving sub-40ms latency metrics using optimized inference servers.
                 </p>
               </div>
 
-              <div class="flex items-center justify-between pt-8 border-t border-white/5 relative z-10">
+              <div class="flex items-center justify-between pt-6 md:pt-8 border-t border-white/5 relative z-10">
                 <span class="text-[10px] font-mono text-slate-500">Systems / Fullstack Developer</span>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300">
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300 touch-manipulation">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                 </a>
               </div>
             </div>
 
             <!-- Project 4: Interactive Web Engine -->
-            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow">
+            <div class="w-[85vw] md:w-[35vw] shrink-0 h-[60vh] md:h-[65vh] glass hover:glass-gold rounded-2xl p-6 md:p-8 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden gold-glow touch-manipulation">
               <div class="absolute inset-0 bg-cover bg-center mix-blend-luminosity opacity-10 group-hover:opacity-20 group-hover:mix-blend-normal transition-all duration-700" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80');"></div>
               
               <div class="flex items-center justify-between relative z-10">
@@ -682,16 +728,16 @@
               </div>
               
               <div class="relative z-10 pt-20">
-                <h3 class="font-heading text-2xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">StellarMap 3D</h3>
+                <h3 class="font-heading text-xl md:text-3xl font-bold text-white group-hover:text-luxury-gold transition-colors">StellarMap 3D</h3>
                 <p class="text-xs md:text-sm text-slate-400 font-light mt-3">
                   An interactive 3D celestial mapping engine capable of rendering thousands of orbital assets and telemetry tracking nodes inside browser-based systems at a locked 60FPS. Fully integrated with responsive control matrices.
                 </p>
               </div>
 
-              <div class="flex items-center justify-between pt-8 border-t border-white/5 relative z-10">
+              <div class="flex items-center justify-between pt-6 md:pt-8 border-t border-white/5 relative z-10">
                 <span class="text-[10px] font-mono text-slate-500">Creative Technologist / WebGL</span>
-                <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300">
-                  <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <a href="#" class="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-luxury-gold hover:text-luxury-black hover:border-luxury-gold transition-all duration-300 touch-manipulation">
+                  <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                 </a>
               </div>
             </div>
@@ -699,23 +745,90 @@
           </div>
         </div>
       </div>
+
+      <!-- Mobile: Vertical Stack -->
+      <div class="md:hidden w-full px-6 pb-12">
+        <div class="flex flex-col space-y-6">
+          <div class="flex items-center space-x-3">
+            <span class="h-[1px] w-8 bg-luxury-gold"></span>
+            <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Curated Portfolio</span>
+          </div>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white leading-none">
+            SELECTED<br>
+            <span class="text-stroke-gold text-luxury-gold font-bold">PROJECTS</span>
+          </h2>
+          
+          <div class="flex flex-col space-y-4">
+            <p class="text-sm text-slate-400 font-light pr-4">
+              A showcase of production-ready builds displaying custom architecture, premium interactions, and strict engineering discipline.
+            </p>
+          </div>
+        </div>
+        
+        <div class="flex flex-col space-y-6 mt-8">
+          <!-- Project Cards for Mobile (simplified vertical stack) -->
+          <div class="glass hover:glass-gold rounded-xl p-6 flex flex-col space-y-4 touch-manipulation">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-luxury-gold font-semibold">[01] DEFI CORE</span>
+              <span class="text-[9px] font-mono tracking-widest glass bg-indigo-950/40 text-indigo-300 border border-indigo-500/20 rounded-full px-2 py-0.5">NEXTJS</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-white">Aether DeFi</h3>
+            <p class="text-xs text-slate-400 font-light">
+              A high-throughput decentralized finance dashboard displaying real-time pool metrics and trading analysis.
+            </p>
+          </div>
+          
+          <div class="glass hover:glass-gold rounded-xl p-6 flex flex-col space-y-4 touch-manipulation">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-luxury-gold font-semibold">[02] ALGORITHMIC TRADING</span>
+              <span class="text-[9px] font-mono tracking-widest glass bg-purple-950/40 text-purple-300 border border-purple-500/20 rounded-full px-2 py-0.5">MQL5</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-white">Valkyrie MT5 EA</h3>
+            <p class="text-xs text-slate-400 font-light">
+              An advanced algorithmic trading engine using MQL5 and Python with ML-based volatility prediction.
+            </p>
+          </div>
+          
+          <div class="glass hover:glass-gold rounded-xl p-6 flex flex-col space-y-4 touch-manipulation">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-luxury-gold font-semibold">[03] ARTIFICIAL INTELLIGENCE</span>
+              <span class="text-[9px] font-mono tracking-widest glass bg-blue-950/40 text-blue-300 border border-blue-500/20 rounded-full px-2 py-0.5">FASTAPI</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-white">SyntaxForge AI</h3>
+            <p class="text-xs text-slate-400 font-light">
+              A high-performance local AI code suggestion editor backend using llama.cpp and FastAPI.
+            </p>
+          </div>
+          
+          <div class="glass hover:glass-gold rounded-xl p-6 flex flex-col space-y-4 touch-manipulation">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono text-luxury-gold font-semibold">[04] GRAPHICS & 3D</span>
+              <span class="text-[9px] font-mono tracking-widest glass bg-rose-950/40 text-rose-300 border border-rose-500/20 rounded-full px-2 py-0.5">THREEJS</span>
+            </div>
+            <h3 class="font-heading text-xl font-bold text-white">StellarMap 3D</h3>
+            <p class="text-xs text-slate-400 font-light">
+              An interactive 3D celestial mapping engine rendering thousands of orbital assets at 60FPS.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
 
-    <!-- 5. Professional Journey / Experience (Timeline Parallax) -->
-    <section id="experience" class="py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-b border-white/5">
+    <!-- 5. Professional Journey / Experience -->
+    <section id="experience" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-b border-white/5">
       <div class="max-w-7xl mx-auto relative z-10">
         <!-- Header -->
-        <div class="flex flex-col items-center text-center mb-24">
+        <div class="flex flex-col items-center text-center mb-16 md:mb-24">
           <div class="flex items-center space-x-3 mb-4">
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Career History</span>
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
           </div>
-          <h2 class="font-heading text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">
+          <h2 class="font-heading text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 md:mb-6">
             Professional Journey
           </h2>
-          <p class="max-w-xl text-sm md:text-base text-slate-400 font-light">
+          <p class="max-w-xl text-xs sm:text-sm md:text-base text-slate-400 font-light px-4 md:px-0">
             An overview of structural project execution and architectural development over the years.
           </p>
         </div>
@@ -726,18 +839,18 @@
           <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-luxury-gold via-slate-800 to-luxury-black/0 -translate-x-1/2"></div>
 
           <!-- Event 1: Lead Engineer -->
-          <div class="timeline-item relative mb-20 flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
+          <div class="timeline-item relative mb-12 md:mb-20 flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
             <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-luxury-gold border-4 border-luxury-black -translate-x-1/2 z-10"></div>
             
             <div class="w-full md:w-[45%] md:pr-12 md:text-right pl-12 md:pl-0 mt-1 md:mt-0">
               <span class="text-xs font-mono text-luxury-gold font-semibold">2024 — PRESENT</span>
-              <h3 class="font-heading text-xl font-bold text-white mt-2">Lead Software Engineer</h3>
+              <h3 class="font-heading text-lg sm:text-xl md:text-xl font-bold text-white mt-2">Lead Software Engineer</h3>
               <p class="text-xs text-slate-500 font-mono mt-1">Apex Systems Group • London / Remote</p>
             </div>
             
             <div class="w-full md:w-[45%] pl-12 md:pl-12 mt-4 md:mt-0">
-              <div class="glass p-6 rounded-xl hover:glass-gold transition-all duration-300">
-                <p class="text-xs md:text-sm text-slate-400 font-light leading-relaxed">
+              <div class="glass p-6 rounded-xl hover:gold-glow transition-all duration-300">
+                <p class="text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
                   Heading core software architecture processes. Standardized reactive frontend dashboards and micro-architectural container integrations across multiple corporate client accounts. Reduced operational resource overhead by 30%.
                 </p>
               </div>
@@ -745,18 +858,18 @@
           </div>
 
           <!-- Event 2: Full Stack Developer -->
-          <div class="timeline-item relative mb-20 flex flex-col md:flex-row-reverse md:justify-between items-start md:items-center w-full">
+          <div class="timeline-item relative mb-12 md:mb-20 flex flex-col md:flex-row-reverse md:justify-between items-start md:items-center w-full">
             <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-slate-600 border-4 border-luxury-black -translate-x-1/2 z-10"></div>
             
             <div class="w-full md:w-[45%] md:pl-12 pl-12 mt-1 md:mt-0">
               <span class="text-xs font-mono text-luxury-gold font-semibold">2022 — 2024</span>
-              <h3 class="font-heading text-xl font-bold text-white mt-2">Senior Full Stack Architect</h3>
+              <h3 class="font-heading text-lg sm:text-xl md:text-xl font-bold text-white mt-2">Senior Full Stack Architect</h3>
               <p class="text-xs text-slate-500 font-mono mt-1">Solara Digital Agency • New York / Remote</p>
             </div>
             
             <div class="w-full md:w-[45%] pr-0 md:pr-12 pl-12 md:pl-0 mt-4 md:mt-0">
-              <div class="glass p-6 rounded-xl hover:glass-gold transition-all duration-300 md:text-right">
-                <p class="text-xs md:text-sm text-slate-400 font-light leading-relaxed">
+              <div class="glass p-6 rounded-xl hover:gold-glow transition-all duration-300 md:text-right">
+                <p class="text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
                   Engineered and deployed massive database indices, high-end API routes in Python/FastAPI, and animated digital platforms. Collaborated on award-winning design portfolios utilizing low-level CSS animations and optimized image configurations.
                 </p>
               </div>
@@ -764,18 +877,18 @@
           </div>
 
           <!-- Event 3: Algorithmic Systems Engineer -->
-          <div class="timeline-item relative mb-20 flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
+          <div class="timeline-item relative mb-12 md:mb-20 flex flex-col md:flex-row md:justify-between items-start md:items-center w-full">
             <div class="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-slate-600 border-4 border-luxury-black -translate-x-1/2 z-10"></div>
             
             <div class="w-full md:w-[45%] md:pr-12 md:text-right pl-12 md:pl-0 mt-1 md:mt-0">
               <span class="text-xs font-mono text-luxury-gold font-semibold">2021 — 2022</span>
-              <h3 class="font-heading text-xl font-bold text-white mt-2">Quantitative Systems Engineer</h3>
+              <h3 class="font-heading text-lg sm:text-xl md:text-xl font-bold text-white mt-2">Quantitative Systems Engineer</h3>
               <p class="text-xs text-slate-500 font-mono mt-1">Zephyr Analytics Systems • Remote</p>
             </div>
             
             <div class="w-full md:w-[45%] pl-12 md:pl-12 mt-4 md:mt-0">
-              <div class="glass p-6 rounded-xl hover:glass-gold transition-all duration-300">
-                <p class="text-xs md:text-sm text-slate-400 font-light leading-relaxed">
+              <div class="glass p-6 rounded-xl hover:gold-glow transition-all duration-300">
+                <p class="text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
                   Programmed automatic algorithmic modules (Expert Advisors) in MQL5 and configured custom sockets to transfer real-time statistical predictions back into MetaTrader 5 trading loops. Maintained strict safety parameters for account protection.
                 </p>
               </div>
@@ -788,13 +901,13 @@
             
             <div class="w-full md:w-[45%] md:pl-12 pl-12 mt-1 md:mt-0">
               <span class="text-xs font-mono text-luxury-gold font-semibold">2019 — 2021</span>
-              <h3 class="font-heading text-xl font-bold text-white mt-2">Junior Web Developer</h3>
+              <h3 class="font-heading text-lg sm:text-xl md:text-xl font-bold text-white mt-2">Junior Web Developer</h3>
               <p class="text-xs text-slate-500 font-mono mt-1">Stellar Networks Ltd • Nairobi / Hybrid</p>
             </div>
             
             <div class="w-full md:w-[45%] pr-0 md:pr-12 pl-12 md:pl-0 mt-4 md:mt-0">
-              <div class="glass p-6 rounded-xl hover:glass-gold transition-all duration-300 md:text-right">
-                <p class="text-xs md:text-sm text-slate-400 font-light leading-relaxed">
+              <div class="glass p-6 rounded-xl hover:gold-glow transition-all duration-300 md:text-right">
+                <p class="text-xs sm:text-sm text-slate-400 font-light leading-relaxed">
                   Began career implementing core HTML5/CSS3 templates, scripting functional JavaScript additions, and managing localized MySQL records and Linux/Nginx deployment setups for dynamic administrative tools.
                 </p>
               </div>
@@ -807,72 +920,69 @@
 
 
     <!-- 6. INTERACTIVE DEVELOPER CONSOLE (Terminal) -->
-    <section id="terminal" class="py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-black">
+    <section id="terminal" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-black">
       <div class="max-w-5xl mx-auto relative z-10">
         <!-- Section Header -->
-        <div class="flex flex-col items-center text-center mb-16">
+        <div class="flex flex-col items-center text-center mb-12 md:mb-16">
           <div class="flex items-center space-x-3 mb-4">
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
             <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Interactive Shell</span>
             <span class="h-[1px] w-6 bg-luxury-gold"></span>
           </div>
-          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+          <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white mb-3 md:mb-4">
             Developer Sandbox
           </h2>
-          <p class="max-w-md text-xs md:text-sm text-slate-400 font-light">
+          <p class="max-w-md text-xs md:text-sm text-slate-400 font-light px-4 md:px-0">
             An interactive terminal showing structural information. Select a source file tab below, or type commands directly into the terminal!
           </p>
         </div>
 
         <!-- Terminal Window Mockup -->
-        <div class="glass rounded-xl overflow-hidden shadow-2xl border border-white/10 flex flex-col h-[500px]">
+        <div class="glass rounded-xl overflow-hidden shadow-2xl border border-white/10 flex flex-col h-[400px] sm:h-[450px] md:h-[500px]">
           <!-- Window Chrome Header -->
           <div class="bg-luxury-gray/95 border-b border-white/5 px-4 py-3 flex items-center justify-between select-none shrink-0">
-            <!-- Mac style circle controls -->
             <div class="flex items-center space-x-2">
               <span class="w-3 h-3 rounded-full bg-red-500/80 flex items-center justify-center text-[8px] text-red-950 font-bold hover:after:content-['x']"></span>
               <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
               <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
             </div>
-            <!-- Center Title -->
-            <span class="text-[11px] font-mono text-slate-400 flex items-center space-x-1.5 font-medium">
+            <span class="text-[10px] font-mono text-slate-400 flex items-center space-x-1.5 font-medium">
               <i data-lucide="terminal" class="w-3.5 h-3.5 text-luxury-gold"></i>
-              <span>bash — jason@ocholla.dev (~/portfolio)</span>
+              <span class="hidden sm:inline">bash — jason@ocholla.dev (~/portfolio)</span>
+              <span class="sm:hidden">bash — jason@portfolio</span>
             </span>
-            <!-- Hidden placeholder to offset left -->
             <div class="w-14"></div>
           </div>
 
           <!-- File Tabs -->
           <div class="bg-[#07070b] border-b border-white/5 flex items-center px-4 overflow-x-auto select-none shrink-0 scrollbar-hide">
-            <button onclick="switchTab('about')" id="tab-about" class="terminal-tab px-4 py-2 border-b-2 border-luxury-gold text-white font-mono text-xs flex items-center space-x-2 hover:bg-white/5 transition-all">
+            <button onclick="switchTab('about')" id="tab-about" class="terminal-tab px-4 py-2 border-b-2 border-luxury-gold text-white font-mono text-xs flex items-center space-x-2 hover:bg-white/5 transition-all whitespace-nowrap touch-manipulation">
               <i data-lucide="user" class="w-3.5 h-3.5 text-luxury-gold"></i>
               <span>about_me.sh</span>
             </button>
-            <button onclick="switchTab('skills')" id="tab-skills" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all">
+            <button onclick="switchTab('skills')" id="tab-skills" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap touch-manipulation">
               <i data-lucide="code" class="w-3.5 h-3.5 text-slate-500"></i>
               <span>skills.json</span>
             </button>
-            <button onclick="switchTab('mql5')" id="tab-mql5" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all">
+            <button onclick="switchTab('mql5')" id="tab-mql5" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap touch-manipulation">
               <i data-lucide="trending-up" class="w-3.5 h-3.5 text-slate-500"></i>
               <span>valkyrie_ea.mq5</span>
             </button>
-            <button onclick="switchTab('help')" id="tab-help" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all">
+            <button onclick="switchTab('help')" id="tab-help" class="terminal-tab px-4 py-2 border-b-2 border-transparent text-slate-500 font-mono text-xs flex items-center space-x-2 hover:bg-white/5 hover:text-white transition-all whitespace-nowrap touch-manipulation">
               <i data-lucide="help-circle" class="w-3.5 h-3.5 text-slate-500"></i>
               <span>interactive_cli.log</span>
             </button>
           </div>
 
           <!-- Terminal Screen Area -->
-          <div id="terminal-screen" class="p-6 overflow-y-auto font-mono text-xs md:text-sm text-slate-300 leading-relaxed bg-[#050508]/95 flex-grow scroll-smooth select-text">
-            <!-- Dynamic Content Output goes here -->
+          <div id="terminal-screen" class="p-4 md:p-6 overflow-y-auto font-mono text-xs md:text-sm text-slate-300 leading-relaxed bg-[#050508]/95 flex-grow scroll-smooth select-text">
             <div id="terminal-text-output" class="whitespace-pre-wrap select-text"></div>
           </div>
 
           <!-- Interactive CLI Input line -->
-          <div class="bg-[#050508] border-t border-white/5 px-6 py-4 flex items-center space-x-2 shrink-0">
+          <div class="bg-[#050508] border-t border-white/5 px-4 md:px-6 py-3 md:py-4 flex items-center space-x-2 shrink-0">
             <span class="text-luxury-gold font-mono text-xs md:text-sm select-none font-bold">jason@ocholla:~$</span>
-            <input type="text" id="terminal-input" class="bg-transparent text-white font-mono text-xs md:text-sm outline-none border-none flex-grow focus:ring-0 placeholder-slate-600" placeholder="Type 'help' to see available interactive shell commands..." autofocus autocomplete="off" spellcheck="false">
+            <input type="text" id="terminal-input" class="bg-transparent text-white font-mono text-xs md:text-sm outline-none border-none flex-grow focus:ring-0 placeholder-slate-600 touch-manipulation" placeholder="Type 'help' for commands..." autocomplete="off" spellcheck="false" inputmode="text">
           </div>
         </div>
       </div>
@@ -880,18 +990,18 @@
 
 
     <!-- 7. Contact / Form Section -->
-    <section id="contact" class="py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-white/5">
-      <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <section id="contact" class="py-24 md:py-32 px-6 md:px-12 relative overflow-hidden bg-luxury-dark border-t border-white/5">
+      <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
         <!-- Info Column -->
-        <div class="lg:col-span-5 flex flex-col justify-between space-y-12">
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-10 md:space-y-12">
           <div class="space-y-6">
             <div class="flex items-center space-x-3">
               <span class="h-[1px] w-8 bg-luxury-gold"></span>
               <span class="text-xs font-mono uppercase tracking-widest text-luxury-gold font-semibold">Initiate Connection</span>
             </div>
             
-            <h2 class="font-display text-4xl md:text-6xl font-extrabold text-white leading-none">
+            <h2 class="font-display text-3xl sm:text-4xl md:text-6xl font-extrabold text-white leading-none">
               LET'S CREATE<br>
               <span class="text-stroke-gold text-luxury-gold font-bold">SOMETHING NEW</span>
             </h2>
@@ -909,7 +1019,7 @@
               </div>
               <div>
                 <p class="text-[10px] uppercase tracking-wider text-slate-500 font-mono">Electronic Mail</p>
-                <a href="mailto:jason@ocholla.dev" class="text-sm md:text-base font-semibold text-white hover:text-luxury-gold transition-colors font-heading">jason@ocholla.dev</a>
+                <a href="mailto:jason@ocholla.dev" class="text-sm md:text-base font-semibold text-white hover:text-luxury-gold transition-colors font-heading touch-manipulation">jason@ocholla.dev</a>
               </div>
             </div>
 
@@ -936,16 +1046,16 @@
 
           <!-- Socials row -->
           <div class="flex items-center space-x-4 pt-4 border-t border-white/5">
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300"><i data-lucide="github" class="w-4 h-4"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300"><i data-lucide="twitter" class="w-4 h-4"></i></a>
-            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300"><i data-lucide="terminal" class="w-4 h-4"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 touch-manipulation"><i data-lucide="github" class="w-4 h-4"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 touch-manipulation"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 touch-manipulation"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-luxury-gold hover:border-luxury-gold transition-all duration-300 touch-manipulation"><i data-lucide="terminal" class="w-4 h-4"></i></a>
           </div>
         </div>
 
         <!-- Form Column -->
         <div class="lg:col-span-7">
-          <form id="contact-form" onsubmit="handleFormSubmit(event)" class="glass-gold rounded-2xl p-8 md:p-10 space-y-6 gold-glow relative z-10">
+          <form id="contact-form" onsubmit="handleFormSubmit(event)" class="glass-gold rounded-2xl p-6 md:p-10 space-y-5 md:space-y-6 gold-glow relative z-10">
             <h3 class="font-heading text-lg font-bold text-white flex items-center space-x-2 mb-2">
               <i data-lucide="message-square" class="w-5 h-5 text-luxury-gold"></i>
               <span>Compose Message</span>
@@ -954,40 +1064,41 @@
             <!-- Custom Status Response Container -->
             <div id="form-status" class="hidden rounded-lg p-4 font-mono text-xs border"></div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 gap-5 md:gap-6">
               <div class="flex flex-col space-y-2">
-                <label for="name" class="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold">Your Designation</label>
-                <input type="text" id="name" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all" placeholder="John Doe">
+                <label for="name" class="text-xs uppercase font-mono tracking-wider text-slate-500 font-semibold">Your Designation</label>
+                <input type="text" id="name" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all touch-manipulation" placeholder="John Doe" autocomplete="name">
               </div>
               <div class="flex flex-col space-y-2">
-                <label for="email" class="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold">Contact Email</label>
-                <input type="email" id="email" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all" placeholder="john@company.com">
+                <label for="email" class="text-xs uppercase font-mono tracking-wider text-slate-500 font-semibold">Contact Email</label>
+                <input type="email" id="email" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all touch-manipulation" placeholder="john@company.com" autocomplete="email">
               </div>
             </div>
 
             <div class="flex flex-col space-y-2">
-              <label for="subject" class="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold">Topic Scope</label>
-              <input type="text" id="subject" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all" placeholder="Enterprise Application Build / WebGL Portal">
+              <label for="subject" class="text-xs uppercase font-mono tracking-wider text-slate-500 font-semibold">Topic Scope</label>
+              <input type="text" id="subject" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all touch-manipulation" placeholder="Enterprise Application Build / WebGL Portal" autocomplete="off">
             </div>
 
             <div class="flex flex-col space-y-2">
-              <label for="message" class="text-[10px] uppercase font-mono tracking-wider text-slate-500 font-semibold">Transmission Payload</label>
-              <textarea id="message" required rows="5" class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all resize-none" placeholder="Enter your project briefs, questions, or message details here..."></textarea>
+              <label for="message" class="text-xs uppercase font-mono tracking-wider text-slate-500 font-semibold">Transmission Payload</label>
+              <textarea id="message" required rows="4" class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-3 text-white font-heading text-sm focus:outline-none focus:border-luxury-gold focus:ring-1 focus:ring-luxury-gold/25 transition-all resize-none touch-manipulation" placeholder="Enter your project briefs, questions, or message details here..." autocomplete="off"></textarea>
             </div>
 
-            <!-- Custom Captcha Verification code just for immersion & reliability -->
+            <!-- Custom Captcha Verification -->
             <div class="flex items-center space-x-4 py-2 border-t border-b border-white/5">
-              <div class="w-24 h-10 rounded bg-[#09090e] border border-white/10 font-mono text-center flex items-center justify-center select-none text-luxury-gold tracking-widest text-sm font-bold relative overflow-hidden" id="captcha-container">
+              <div class="w-20 h-10 rounded bg-[#09090e] border border-white/10 font-mono text-center flex items-center justify-center select-none text-luxury-gold tracking-widest text-sm font-bold relative overflow-hidden" id="captcha-container">
                 <span class="absolute inset-0 bg-[linear-gradient(45deg,transparent_45%,rgba(229,193,88,0.1)_50%,transparent_55%)] bg-[size:10px_10px] pointer-events-none"></span>
                 <span id="captcha-code" class="relative z-10 filter blur-[0.4px]">8F2C</span>
+                <button type="button" onclick="generateCaptcha()" class="absolute inset-0 w-full h-full opacity-0 touch-manipulation" aria-label="Refresh captcha">Refresh</button>
               </div>
               <div class="flex-grow flex flex-col space-y-1">
-                <input type="text" id="captcha-input" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-luxury-gold transition-all" placeholder="Verify human challenge">
+                <input type="text" id="captcha-input" required class="bg-luxury-black/60 border border-white/10 rounded-lg px-4 py-2.5 text-white font-mono text-xs focus:outline-none focus:border-luxury-gold transition-all touch-manipulation" placeholder="Verify human challenge" autocomplete="off" inputmode="text">
               </div>
             </div>
 
             <div class="magnetic-wrap w-full">
-              <button type="submit" id="form-submit-btn" class="magnetic-btn w-full flex items-center justify-center space-x-2.5 px-8 py-4 bg-luxury-gold hover:bg-white text-luxury-black font-heading font-semibold uppercase tracking-wider text-xs rounded-xl shadow-lg shadow-amber-950/20 transition-all duration-300">
+              <button type="submit" id="form-submit-btn" class="magnetic-btn w-full flex items-center justify-center space-x-2 px-6 md:px-8 py-3 md:py-4 bg-luxury-gold hover:bg-white text-luxury-black font-heading font-semibold uppercase tracking-wider text-xs rounded-xl shadow-lg shadow-amber-950/20 transition-all duration-300 touch-manipulation">
                 <i data-lucide="send" class="w-4 h-4"></i>
                 <span>Transmit Transmission</span>
               </button>
@@ -998,9 +1109,8 @@
       </div>
     </section>
 
-
     <!-- Footer -->
-    <footer class="py-12 bg-[#020205] border-t border-white/5 px-6 md:px-12 text-center md:text-left select-none">
+    <footer class="py-10 md:py-12 bg-[#020205] border-t border-white/5 px-6 md:px-12 text-center md:text-left select-none">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
         <div>
           <span class="font-display text-xl font-bold tracking-wider text-white">
@@ -1011,11 +1121,11 @@
           </p>
         </div>
         
-        <div class="flex space-x-8 font-mono text-[10px] uppercase tracking-widest text-slate-500">
-          <a href="#about" class="hover:text-luxury-gold transition-colors">ARCHIVE</a>
-          <a href="#projects" class="hover:text-luxury-gold transition-colors">PROJECTS</a>
-          <a href="#terminal" class="hover:text-luxury-gold transition-colors">CONSOLE</a>
-          <a href="#contact" class="hover:text-luxury-gold transition-colors">CONTACT</a>
+        <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+          <a href="#about" class="hover:text-luxury-gold transition-colors touch-manipulation">ARCHIVE</a>
+          <a href="#projects" class="hover:text-luxury-gold transition-colors touch-manipulation">PROJECTS</a>
+          <a href="#terminal" class="hover:text-luxury-gold transition-colors touch-manipulation">CONSOLE</a>
+          <a href="#contact" class="hover:text-luxury-gold transition-colors touch-manipulation">CONTACT</a>
         </div>
       </div>
     </footer>
@@ -1032,6 +1142,10 @@
 
   <!-- Initialization and Animations Script -->
   <script>
+    // Detect mobile device for performance optimizations
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     // Initialize Lucide Icons
     lucide.createIcons();
 
@@ -1064,117 +1178,147 @@
 
 
     // -------------------------------------------------------------
-    // Custom Cursor Interaction
+    // Custom Cursor Interaction (Desktop only with hover support)
     // -------------------------------------------------------------
     const cursor = document.getElementById('custom-cursor');
     const cursorDot = document.getElementById('custom-cursor-dot');
+    let cursorEnabled = false;
     
-    document.addEventListener('mousemove', (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.15
+    // Only enable cursor on devices that support hover
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      cursorEnabled = true;
+      cursor.classList.remove('cursor-desktop');
+      cursorDot.classList.remove('cursor-desktop');
+    }
+    
+    if (cursorEnabled) {
+      document.addEventListener('mousemove', (e) => {
+        gsap.to(cursor, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.15
+        });
+        gsap.to(cursorDot, {
+          x: e.clientX,
+          y: e.clientY,
+          duration: 0.05
+        });
       });
-      gsap.to(cursorDot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.05
-      });
-    });
 
-    // Expand cursor on hover
-    const hoverables = document.querySelectorAll('a, button, input, textarea, .skill-card, .terminal-tab');
-    hoverables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '48px';
-        cursor.style.height = '48px';
-        cursor.style.borderColor = '#ffffff';
-        cursor.style.backgroundColor = 'rgba(255,255,255,0.05)';
-        cursorDot.style.backgroundColor = '#ffffff';
+      // Expand cursor on hover
+      const hoverables = document.querySelectorAll('a, button, input, textarea, .skill-card, .terminal-tab, .magnetic-btn');
+      hoverables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.style.width = '48px';
+          cursor.style.height = '48px';
+          cursor.style.borderColor = '#ffffff';
+          cursor.style.backgroundColor = 'rgba(255,255,255,0.05)';
+          cursorDot.style.backgroundColor = '#ffffff';
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.style.width = '24px';
+          cursor.style.height = '24px';
+          cursor.style.borderColor = '#e5c158';
+          cursor.style.backgroundColor = 'transparent';
+          cursorDot.style.backgroundColor = '#e5c158';
+        });
       });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '24px';
-        cursor.style.height = '24px';
-        cursor.style.borderColor = '#e5c158';
-        cursor.style.backgroundColor = 'transparent';
-        cursorDot.style.backgroundColor = '#e5c158';
-      });
-    });
+    }
 
 
     // -------------------------------------------------------------
-    // Mobile Navigation Drawer Toggle
+    // Mobile Navigation Drawer Toggle (Touch optimized)
     // -------------------------------------------------------------
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     let isMenuOpen = false;
 
-    menuToggle.addEventListener('click', () => {
-      isMenuOpen = !isMenuOpen;
-      if (isMenuOpen) {
-        mobileMenu.classList.remove('hidden');
-        setTimeout(() => {
-          mobileMenu.style.transform = 'translateX(0)';
-        }, 10);
-        menuToggle.innerHTML = '<i data-lucide="x" class="w-6 h-6 text-white"></i>';
-      } else {
-        mobileMenu.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-          mobileMenu.classList.add('hidden');
-        }, 500);
-        menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6 text-white"></i>';
-      }
-      lucide.createIcons();
-    });
-
-    // Close menu when clicking link
-    document.querySelectorAll('.mobile-nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        isMenuOpen = false;
-        mobileMenu.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-          mobileMenu.classList.add('hidden');
-        }, 500);
-        menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6 text-white"></i>';
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        menuToggle.setAttribute('aria-expanded', isMenuOpen);
+        
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('hidden');
+          setTimeout(() => {
+            mobileMenu.style.transform = 'translateX(0)';
+          }, 10);
+          menuToggle.innerHTML = '<i data-lucide="x" class="w-6 h-6 text-white"></i>';
+        } else {
+          mobileMenu.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+          }, 500);
+          menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6 text-white"></i>';
+        }
         lucide.createIcons();
       });
-    });
+
+      // Close menu when clicking link
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          isMenuOpen = false;
+          menuToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+          }, 500);
+          menuToggle.innerHTML = '<i data-lucide="menu" class="w-6 h-6 text-white"></i>';
+          lucide.createIcons();
+        });
+      });
+    }
 
 
     // -------------------------------------------------------------
-    // Magnetic Button Interactions
+    // Magnetic Button Interactions (Simplified for mobile)
     // -------------------------------------------------------------
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
-    magneticBtns.forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        gsap.to(btn, {
-          x: x * 0.4,
-          y: y * 0.4,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
+    
+    // Only enable magnetic effect on non-touch devices
+    if (!isTouchDevice) {
+      magneticBtns.forEach(btn => {
+        const wrap = btn.closest('.magnetic-wrap');
+        if (wrap) {
+          wrap.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            gsap.to(btn, {
+              x: x * 0.4,
+              y: y * 0.4,
+              duration: 0.3,
+              ease: 'power2.out'
+            });
+          });
+          
+          wrap.addEventListener('mouseleave', () => {
+            gsap.to(btn, {
+              x: 0,
+              y: 0,
+              duration: 0.5,
+              ease: 'elastic.out(1, 0.3)'
+            });
+          });
+        }
       });
-      
-      btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, {
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.3)'
-        });
-      });
-    });
+    }
 
 
     // -------------------------------------------------------------
-    // Three.js (WebGL) 3D Immersive Canvas setup
+    // Three.js (WebGL) 3D Immersive Canvas setup (Performance aware)
     // -------------------------------------------------------------
     let scene, camera, renderer, starGeometry, starField, shapeGeometry, shapeMesh;
     const canvasElement = document.getElementById('webgl-canvas');
+    let animationId = null;
+    
+    // Adaptive performance settings based on device
+    const performanceSettings = {
+      starCount: isMobile ? 800 : 3000,
+      pixelRatio: isMobile ? Math.min(window.devicePixelRatio, 1.5) : Math.min(window.devicePixelRatio, 2),
+      enableShapes: !isMobile, // Disable 3D shapes on mobile for performance
+    };
 
     function initWebGL() {
       // Create Scene
@@ -1188,60 +1332,50 @@
       // Renderer
       renderer = new THREE.WebGLRenderer({
         canvas: canvasElement,
-        antialias: true,
+        antialias: !isMobile, // Disable antialiasing on mobile for performance
         alpha: true
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(performanceSettings.pixelRatio);
       renderer.setSize(window.innerWidth, window.innerHeight);
 
-      // Light Sources
+      // Light Sources (simpler on mobile)
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
       scene.add(ambientLight);
 
-      const dirLight1 = new THREE.DirectionalLight(0xe5c158, 2.0); // luxury gold
-      dirLight1.position.set(10, 20, 15);
-      scene.add(dirLight1);
+      if (!isMobile) {
+        const dirLight1 = new THREE.DirectionalLight(0xe5c158, 2.0); // luxury gold
+        dirLight1.position.set(10, 20, 15);
+        scene.add(dirLight1);
 
-      const dirLight2 = new THREE.DirectionalLight(0x8b5cf6, 1.5); // indigo/purple
-      dirLight2.position.set(-10, -20, -15);
-      scene.add(dirLight2);
+        const dirLight2 = new THREE.DirectionalLight(0x8b5cf6, 1.5); // indigo/purple
+        dirLight2.position.set(-10, -20, -15);
+        scene.add(dirLight2);
+      }
 
-      // 1. Particle Star Field Background
-      const starCount = 3000;
+      // 1. Particle Star Field Background (reduced on mobile)
+      const starCount = performanceSettings.starCount;
       starGeometry = new THREE.BufferGeometry();
       const starPositions = new Float32Array(starCount * 3);
       const starColors = new Float32Array(starCount * 3);
 
       for (let i = 0; i < starCount * 3; i += 3) {
-        // Disperse stars in cubic shell
         starPositions[i] = (Math.random() - 0.5) * 120;
         starPositions[i+1] = (Math.random() - 0.5) * 120;
         starPositions[i+2] = (Math.random() - 0.5) * 100;
 
-        // Blended luxury colors for particles (Golds, Purples, Silvers)
         const rand = Math.random();
         if (rand < 0.4) {
-          // Purple glow star
-          starColors[i] = 0.54;   // R: 139
-          starColors[i+1] = 0.36; // G: 92
-          starColors[i+2] = 0.96; // B: 246
+          starColors[i] = 0.54; starColors[i+1] = 0.36; starColors[i+2] = 0.96;
         } else if (rand < 0.8) {
-          // Luxury gold star
-          starColors[i] = 0.90;   // R: 229
-          starColors[i+1] = 0.75; // G: 193
-          starColors[i+2] = 0.34; // B: 88
+          starColors[i] = 0.90; starColors[i+1] = 0.75; starColors[i+2] = 0.34;
         } else {
-          // Ice silver star
-          starColors[i] = 0.8;
-          starColors[i+1] = 0.85;
-          starColors[i+2] = 0.95;
+          starColors[i] = 0.8; starColors[i+1] = 0.85; starColors[i+2] = 0.95;
         }
       }
 
       starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
       starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
-      // Texture loader for soft points
       const starMaterial = new THREE.PointsMaterial({
         size: 0.15,
         vertexColors: true,
@@ -1254,77 +1388,71 @@
       starField = new THREE.Points(starGeometry, starMaterial);
       scene.add(starField);
 
-      // 2. Central Morphing 3D Geometry representing Jason's Work (Torus Knot)
-      shapeGeometry = new THREE.TorusKnotGeometry(6, 1.8, 150, 16);
-      
-      const shapeMaterial = new THREE.MeshPhysicalMaterial({
-        color: 0xe5c158,
-        metalness: 0.9,
-        roughness: 0.1,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.1,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.85,
-        emissive: 0x1d1000
-      });
+      // 2. Central Morphing 3D Geometry (only on non-mobile)
+      if (performanceSettings.enableShapes) {
+        shapeGeometry = new THREE.TorusKnotGeometry(6, 1.8, 100, 12);
+        
+        const shapeMaterial = new THREE.MeshPhysicalMaterial({
+          color: 0xe5c158,
+          metalness: 0.9,
+          roughness: 0.1,
+          clearcoat: 1.0,
+          clearcoatRoughness: 0.1,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.85,
+          emissive: 0x1d1000
+        });
 
-      shapeMesh = new THREE.Mesh(shapeGeometry, shapeMaterial);
-      scene.add(shapeMesh);
+        shapeMesh = new THREE.Mesh(shapeGeometry, shapeMaterial);
+        scene.add(shapeMesh);
+      }
 
-      // Mouse Interaction coordinates
+      // Mouse Interaction
       let targetX = 0, targetY = 0;
       document.addEventListener('mousemove', (event) => {
         targetX = (event.clientX - window.innerWidth / 2) * 0.015;
         targetY = (event.clientY - window.innerHeight / 2) * 0.015;
       });
 
-      // Render Loop with smooth drifting
       const clock = new THREE.Clock();
       
       function animateWebGLScene() {
-        requestAnimationFrame(animateWebGLScene);
+        animationId = requestAnimationFrame(animateWebGLScene);
         
         const elapsedTime = clock.getElapsedTime();
-
-        // Slow standard rotations
         starField.rotation.y = elapsedTime * 0.015;
         starField.rotation.x = elapsedTime * 0.005;
 
-        shapeMesh.rotation.y = elapsedTime * 0.12;
-        shapeMesh.rotation.z = elapsedTime * 0.08;
-
-        // Mouse Parallax drift on camera
-        camera.position.x += (targetX - camera.position.x) * 0.05;
-        camera.position.y += (-targetY - camera.position.y) * 0.05;
-        camera.lookAt(scene.position);
+        if (shapeMesh) {
+          shapeMesh.rotation.y = elapsedTime * 0.12;
+          shapeMesh.rotation.z = elapsedTime * 0.08;
+          camera.position.x += (targetX - camera.position.x) * 0.05;
+          camera.position.y += (-targetY - camera.position.y) * 0.05;
+          camera.lookAt(scene.position);
+        }
 
         renderer.render(scene, camera);
       }
 
       animateWebGLScene();
 
-      // Handle Resizing
       window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setPixelRatio(performanceSettings.pixelRatio);
       });
     }
 
-    // Run WebGL Initialization
     initWebGL();
 
 
     // -------------------------------------------------------------
-    // GSAP ScrollTrigger Animations & Parallax Choreography
+    // GSAP ScrollTrigger Animations
     // -------------------------------------------------------------
-    
-    // Register ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Hero Entry Reveals
     gsap.to('.hero-reveal', {
       opacity: 1,
       y: 0,
@@ -1334,76 +1462,39 @@
       delay: 0.3
     });
 
-    // 3D Geometry Position/Scale changes synced with Page Scroll sections
-    // Section 1: Hero to About
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: "#about",
-        start: "top bottom",
-        end: "top top",
-        scrub: 1
-      }
-    })
-    .to(shapeMesh.position, { x: 8, y: 0, z: -10 })
-    .to(shapeMesh.scale, { x: 0.65, y: 0.65, z: 0.65 }, "<")
-    .to(shapeMesh.material, { color: 0x8b5cf6, emissive: 0x10002b }, "<"); // Shifts color to purple
+    if (shapeMesh) {
+      gsap.timeline({ scrollTrigger: { trigger: "#about", start: "top bottom", end: "top top", scrub: 1 }})
+      .to(shapeMesh.position, { x: 8, y: 0, z: -10 })
+      .to(shapeMesh.scale, { x: 0.65, y: 0.65, z: 0.65 }, "<")
+      .to(shapeMesh.material, { color: 0x8b5cf6, emissive: 0x10002b }, "<");
 
-    // Section 2: About to Skills
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: "#skills",
-        start: "top bottom",
-        end: "top top",
-        scrub: 1
-      }
-    })
-    .to(shapeMesh.position, { x: -8, y: 3, z: -5 })
-    .to(shapeMesh.scale, { x: 0.8, y: 0.8, z: 0.8 }, "<")
-    .to(shapeMesh.material, { color: 0xe5c158, emissive: 0x1d1000 }, "<"); // back to gold
+      gsap.timeline({ scrollTrigger: { trigger: "#skills", start: "top bottom", end: "top top", scrub: 1 }})
+      .to(shapeMesh.position, { x: -8, y: 3, z: -5 })
+      .to(shapeMesh.scale, { x: 0.8, y: 0.8, z: 0.8 }, "<")
+      .to(shapeMesh.material, { color: 0xe5c158, emissive: 0x1d1000 }, "<");
 
-    // Section 3: Skills to Projects
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: "#projects",
-        start: "top bottom",
-        end: "top top",
-        scrub: 1
-      }
-    })
-    .to(shapeMesh.position, { x: 0, y: -2, z: -15 })
-    .to(shapeMesh.scale, { x: 0.4, y: 0.4, z: 0.4 }, "<")
-    .to(shapeMesh.material, { wireframe: true, opacity: 0.4 }, "<");
+      gsap.timeline({ scrollTrigger: { trigger: "#projects", start: "top bottom", end: "top top", scrub: 1 }})
+      .to(shapeMesh.position, { x: 0, y: -2, z: -15 })
+      .to(shapeMesh.scale, { x: 0.4, y: 0.4, z: 0.4 }, "<")
+      .to(shapeMesh.material, { wireframe: true, opacity: 0.4 }, "<");
 
-    // Section 4: Projects to Contact
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: "#contact",
-        start: "top bottom",
-        end: "top top",
-        scrub: 1
-      }
-    })
-    .to(shapeMesh.position, { x: 6, y: -4, z: -8 })
-    .to(shapeMesh.scale, { x: 0.7, y: 0.7, z: 0.7 }, "<")
-    .to(shapeMesh.material, { color: 0x3b82f6, opacity: 0.7 }, "<");
+      gsap.timeline({ scrollTrigger: { trigger: "#contact", start: "top bottom", end: "top top", scrub: 1 }})
+      .to(shapeMesh.position, { x: 6, y: -4, z: -8 })
+      .to(shapeMesh.scale, { x: 0.7, y: 0.7, z: 0.7 }, "<")
+      .to(shapeMesh.material, { color: 0x3b82f6, opacity: 0.7 }, "<");
+    }
 
 
     // -------------------------------------------------------------
-    // Horizontal Scroll pinned container for Projects Showcase
+    // Horizontal Scroll for Projects (Desktop only)
     // -------------------------------------------------------------
     const track = document.getElementById('projects-track');
     
-    // Determine the scroll length based on window size
-    function getScrollAmount() {
-      let trackWidth = track.scrollWidth;
-      return -(trackWidth - window.innerWidth);
-    }
+    if (track && !isMobile) {
+      function getScrollAmount() {
+        return -(track.scrollWidth - window.innerWidth);
+      }
 
-    // Responsive ScrollTrigger Switcher: Horizontal scroll on large, vertical stack on small devices
-    let mm = gsap.matchMedia();
-
-    mm.add("(min-width: 768px)", () => {
-      // Horizontal desktop configuration
       gsap.to(track, {
         x: () => getScrollAmount(),
         ease: "none",
@@ -1416,22 +1507,16 @@
           invalidateOnRefresh: true,
         }
       });
-    });
-
-    mm.add("(max-width: 767px)", () => {
-      // Mobile stack configuration - reset transform matrix
-      gsap.set(track, { x: 0, position: 'relative' });
-      // Change list direction dynamically if needed, tailwind handles stack nicely
-    });
+    }
 
 
-    // -------------------------------------------------------------
-    // Interactive Developer Terminal Mockup JS Code
-    // -------------------------------------------------------------
+    window.switchTab = switchTab;
+    window.generateCaptcha = generateCaptcha;
+    window.handleFormSubmit = handleFormSubmit;
+
     const inputField = document.getElementById('terminal-input');
     const textOutput = document.getElementById('terminal-text-output');
     
-    // Commands Database
     const commands = {
       help: `Available shell systems:
   - about       View biological and organizational specifications
@@ -1440,15 +1525,13 @@
   - mql5        Review Valkyrie Algorithmic structural overview
   - clear       Wipe terminal frame logs
   - contact     Initiate communication protocol`,
-      
-      about: `================ JASON OCHOLLA PROFILE ===============
+      about: `================ JASON OCHOLLA PROFILE ================
 NAME        : Jason Ocholla
 ROLE        : Senior Software & Web Architect
 EXPERTISE   : Frontend, Backend API Design, 3D WebGL Rendering
 LOCATION    : United Kingdom / Kenya (Available Globally)
 MOTTO       : "Architecture balance, clean execution, solid results"
 BIO         : Immersive developer optimizing applications with GSAP, Next.js, and Three.js.`,
-      
       skills: `{
   "core_competencies": {
     "languages": ["TypeScript", "Python", "JavaScript ES6+", "SQL", "MQL5 (C++)", "HTML5/CSS3"],
@@ -1461,32 +1544,26 @@ BIO         : Immersive developer optimizing applications with GSAP, Next.js, an
     "system_optimization": 0.90
   }
 }`,
-
-      mql5: `================ VALKYRIE EA STATUS REPORT ================
+      mql5: `================ VALKYRIE EA STATUS REPORT ===============
 COMPILER    : MetaEditor (MQL5 Compiler v5.00)
 STRATEGY    : Volatility prediction utilizing local statistical bounds
 INTEGRATION : MT5 Terminal <--> Python Socket API Broker Gateway
 PERFORMANCE : Locked latency metrics, automated risk calculation matrix
 SAFETY      : Implemented equity guards, dynamic slippage reduction core`,
-
       projects: `Enumerating Active Projects:
 1. [AETHER DEFI]     - High-throughput Next.js DeFi dashboard with WebSocket support.
 2. [VALKYRIE EA]     - Machine learning statistical-based Expert Advisor in MQL5.
 3. [SYNTAXFORGE AI]  - local suggestions engine using llama.cpp and FastAPI.
 4. [STELLARMAP 3D]   - Three.js star tracking telemetry module rendering 60FPS.`,
-
       contact: `Directing communication pipeline...
 Email : jason@ocholla.dev
 Status: Listening on port 443 for connection vectors. Use form below to transmit directly!`
     };
 
-    // Terminal tab switcher function
     window.switchTab = function(tab) {
-      // Toggle Tab Styles
       document.querySelectorAll('.terminal-tab').forEach(el => {
         el.classList.remove('border-luxury-gold', 'text-white');
         el.classList.add('border-transparent', 'text-slate-500');
-        // change inner icon color if active
         const icon = el.querySelector('i');
         if (icon) icon.className = icon.className.replace('text-luxury-gold', 'text-slate-500');
       });
@@ -1496,31 +1573,20 @@ Status: Listening on port 443 for connection vectors. Use form below to transmit
         activeTab.classList.remove('border-transparent', 'text-slate-500');
         activeTab.classList.add('border-luxury-gold', 'text-white');
         const icon = activeTab.querySelector('i');
-        if (icon) {
-          icon.className = icon.className.replace('text-slate-500', 'text-luxury-gold');
-        }
+        if (icon) icon.className = icon.className.replace('text-slate-500', 'text-luxury-gold');
       }
 
-      // Output Tab Contents to Terminal
-      if (tab === 'about') {
-        typeInTerminal(commands.about);
-      } else if (tab === 'skills') {
-        typeInTerminal(commands.skills);
-      } else if (tab === 'mql5') {
-        typeInTerminal(commands.mql5);
-      } else if (tab === 'help') {
-        typeInTerminal(commands.help);
-      }
+      if (tab === 'about') typeInTerminal(commands.about);
+      else if (tab === 'skills') typeInTerminal(commands.skills);
+      else if (tab === 'mql5') typeInTerminal(commands.mql5);
+      else if (tab === 'help') typeInTerminal(commands.help);
     }
 
-    // Simulate Typing into terminal
     let typingTimer = null;
     function typeInTerminal(text) {
       if (typingTimer) clearTimeout(typingTimer);
       textOutput.textContent = '';
       let index = 0;
-      
-      // Speed up typing for large text
       const charsPerTick = text.length > 150 ? 5 : 1;
       
       function type() {
@@ -1534,34 +1600,27 @@ Status: Listening on port 443 for connection vectors. Use form below to transmit
       type();
     }
 
-    // Default load tab About
     switchTab('about');
 
-    // Live Command Shell processing
-    inputField.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const input = inputField.value.trim().toLowerCase();
-        inputField.value = '';
+    if (inputField) {
+      inputField.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const input = inputField.value.trim().toLowerCase();
+          inputField.value = '';
 
-        if (!input) return;
+          if (!input) return;
+          textOutput.textContent += `\n\njason@ocholla:~$ ${input}\n`;
 
-        // Print Input
-        textOutput.textContent += `\n\njason@ocholla:~$ ${input}\n`;
-
-        if (commands[input]) {
-          textOutput.textContent += commands[input];
-        } else if (input === 'clear') {
-          textOutput.textContent = 'bash terminal log cleared.';
-        } else {
-          textOutput.textContent += `Command not recognized: '${input}'. Type 'help' to review directory.`;
+          if (commands[input]) textOutput.textContent += commands[input];
+          else if (input === 'clear') textOutput.textContent = 'bash terminal log cleared.';
+          else textOutput.textContent += `Command not recognized: '${input}'. Type 'help' to review directory.`;
+          
+          setTimeout(() => {
+            document.getElementById('terminal-screen').scrollTop = document.getElementById('terminal-screen').scrollHeight;
+          }, 10);
         }
-        
-        // Scroll to bottom
-        setTimeout(() => {
-          document.getElementById('terminal-screen').scrollTop = document.getElementById('terminal-screen').scrollHeight;
-        }, 10);
-      }
-    });
+      });
+    }
 
 
     // -------------------------------------------------------------
@@ -1571,9 +1630,8 @@ Status: Listening on port 443 for connection vectors. Use form below to transmit
     const captchaInput = document.getElementById('captcha-input');
     const formStatus = document.getElementById('form-status');
 
-    // Generate random alphanumeric captcha code
-    function generateCaptcha() {
-      const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ'; // Removed confusing chars like 0, O, 1, I, l
+    window.generateCaptcha = function() {
+      const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
       let code = '';
       for (let i = 0; i < 4; i++) {
         code += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -1582,31 +1640,34 @@ Status: Listening on port 443 for connection vectors. Use form below to transmit
     }
     generateCaptcha();
 
-    // Form Submit Action
     window.handleFormSubmit = function(event) {
       event.preventDefault();
       
       const enteredCaptcha = captchaInput.value.trim().toUpperCase();
       const actualCaptcha = captchaCodeSpan.textContent;
 
-      formStatus.classList.remove('hidden', 'bg-red-950/40', 'border-red-500/30', 'text-red-400', 'bg-emerald-950/40', 'border-emerald-500/30', 'text-emerald-400');
+      formStatus.className = 'rounded-lg p-4 font-mono text-xs border';
 
       if (enteredCaptcha !== actualCaptcha) {
-        // Captcha Failure
-        formStatus.classList.add('bg-red-950/40', 'border-red-500/30', 'text-red-400', 'block');
-        formStatus.innerHTML = '<i data-lucide="shield-alert" class="w-4 h-4 inline-block mr-1.5 align-middle"></i><strong>Verification Failure:</strong> Human validation failed. Code mismatch. Transmitting halted.';
+        formStatus.classList.add('bg-red-950/40', 'border-red-500/30', 'text-red-400');
+        formStatus.innerHTML = '<i data-lucide="shield-alert" class="w-4 h-4 inline-block mr-1.5 align-middle"></i><strong>Verification Failure:</strong> Human validation failed. Transmitting halted.';
         generateCaptcha();
         captchaInput.value = '';
         lucide.createIcons();
         return;
       }
 
-      // Success
-      const nameVal = document.getElementById('name').value;
-      formStatus.classList.add('bg-emerald-950/40', 'border-emerald-500/30', 'text-emerald-400', 'block');
-      formStatus.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 inline-block mr-1.5 align-middle"></i><strong>Transmission Confirmed:</strong> Thank you, ${nameVal}! Secure payload has been packaged and dispatched to Jason Ocholla. Status: 202 ACCEPTED.`;
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        timestamp: new Date().toISOString()
+      };
+
+      formStatus.classList.add('bg-emerald-950/40', 'border-emerald-500/30', 'text-emerald-400');
+      formStatus.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 inline-block mr-1.5 align-middle"></i><strong>Transmission Confirmed:</strong> Thank you, ${formData.name}! Secure payload has been dispatched to Jason Ocholla.`;
       
-      // Clear Form Fields
       document.getElementById('contact-form').reset();
       generateCaptcha();
       lucide.createIcons();
