@@ -1,0 +1,29 @@
+/* Carousel display counts: three blog cards, one testimonial at a time. */
+.content-track[data-slider="blog"] {
+  grid-auto-columns: calc((100% - 2rem) / 3);
+}
+
+.content-track[data-slider="testimonials"] {
+  grid-auto-columns: 100%;
+}
+
+@media (max-width: 1100px) {
+  .content-track[data-slider="blog"] {
+    grid-auto-columns: calc((100% - 1rem) / 2);
+  }
+
+  .content-track[data-slider="testimonials"] {
+    grid-auto-columns: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .content-track[data-slider="blog"],
+  .content-track[data-slider="testimonials"] {
+    grid-auto-columns: 88%;
+  }
+
+  .content-track[data-slider="testimonials"] {
+    grid-auto-columns: 100%;
+  }
+}
