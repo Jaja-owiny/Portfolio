@@ -11,6 +11,7 @@
 
   const setMenu = (open) => {
     menu.classList.toggle('open', open);
+    header.classList.toggle('menu-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
     menu.setAttribute('aria-hidden', String(!open));
   };

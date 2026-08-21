@@ -1,0 +1,40 @@
+.contact-details > a[href^="https://github.com"] { display: none; }
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-top: .45rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  color: var(--muted);
+  background: rgba(255, 253, 249, .62);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 1rem;
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  color: var(--cream);
+  background: var(--maroon);
+  border-color: var(--maroon);
+  box-shadow: 0 10px 22px rgba(118, 47, 60, .2);
+  transform: translateY(-4px);
+}
+
+.social-links a:active {
+  transform: translateY(-1px) scale(.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-links a { transition: color .2s ease, background-color .2s ease, border-color .2s ease; }
+  .social-links a:hover, .social-links a:focus-visible { transform: none; }
+}
