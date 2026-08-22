@@ -8,6 +8,8 @@
       content="Jason Ocholla builds thoughtful software, interfaces, and interactive web experiences."
     />
     <title>Jason Ocholla | Software & Web Engineer</title>
+    <link rel="icon" type="image/png" href="static/assets/favicon.ico" loading="lazy" />
+    <link rel="apple-touch-icon" href="static/assets/apple-touch-icon-180x180.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -64,11 +66,23 @@
         class="container-xxl d-flex align-items-center justify-content-between py-3 px-4 px-xl-5"
         aria-label="Primary navigation"
       >
-        <a class="brand brand-pill" href="#hero">J<span>.</span>OCHOLLA</a>
+        <a class="brand brand-pill" href="#hero">
+          <picture class="brand-logo" aria-hidden="true">
+            <source media="(max-width: 400px)" srcset="static/assets/icon-16x16.png" />
+            <source media="(max-width: 767px)" srcset="static/assets/icon-32x32.png" />
+            <source media="(max-width: 1199px)" srcset="static/assets/icon-48x48.png" />
+            <img src="static/assets/icon-192x192.png" alt="Personal Brand Logo" width="32" height="32" />
+          </picture>
+          <span class="brand-name">J<span>.</span>OCHOLLA</span>
+        </a>
         <div class="desktop-nav d-none d-md-flex gap-4">
-          <a href="#about">About</a><a href="#skills">Capabilities</a
-          ><a href="#projects">Work</a><a href="#experience">Journey</a
-          ><a href="#terminal">Terminal</a><a href="#contact">Contact</a>
+        <a href="#about">About</a
+        ><a href="#terminal">Terminal</a
+        ><a href="#skills">Capabilities</a
+        ><a href="#projects">Work</a
+        ><a href="#experience">Journey</a
+        ><a href="#blog">Blog</a
+        ><a href="#faqs">FAQs</a>
         </div>
         <a class="header-cta d-none d-sm-inline-flex" href="#contact"
           >Start a conversation <i data-lucide="arrow-up-right"></i></a
@@ -86,10 +100,12 @@
       </nav>
       <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
         <a href="#about" class="mobile-nav-link">About</a
+        ><a href="#terminal" class="mobile-nav-link">Terminal</a
         ><a href="#skills" class="mobile-nav-link">Capabilities</a
         ><a href="#projects" class="mobile-nav-link">Work</a
         ><a href="#experience" class="mobile-nav-link">Journey</a
-        ><a href="#terminal" class="mobile-nav-link">Terminal</a
+        ><a href="#blog" class="mobile-nav-link">Blog</a
+        ><a href="#faqs" class="mobile-nav-link">FAQs</a
         ><a href="#contact" class="mobile-nav-link">Contact</a>
       </div>
     </header>
@@ -638,7 +654,17 @@
       <div
         class="container-xxl px-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between gap-3"
       >
-        <span class="brand">J<span>.</span>OCHOLLA</span
+        <span class="brand">
+          <picture class="brand-logo" aria-hidden="true">
+            <img
+              src="static/assets/footer-logo-white-512.png"
+              alt=""
+              width="32"
+              height="32"
+            />
+          </picture>
+          <span class="brand-name">J<span>.</span>OCHOLLA</span>
+        </span
         ><span>© 2026 · Built with care and a little curiosity.</span
         ><a href="#hero">Back to top ↑</a>
       </div>

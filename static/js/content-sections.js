@@ -12,6 +12,15 @@
   testimonials.className = 'content-section content-section--white';
   testimonials.innerHTML = `<div class="container-xxl px-4 px-xl-5"><div class="content-section__heading"><div><p class="eyebrow"><span></span> Words from collaborators</p><h2 class="section-title">Good work leaves a <em>trace.</em></h2></div><p class="section-index d-none d-md-block">05 / 06</p></div><div class="content-slider"><div class="content-track testimonial-track" data-slider="testimonials"><article class="testimonial-card"><blockquote>Jason brought structure to a difficult product without sanding away its character.</blockquote><cite>Product lead / London</cite></article><article class="testimonial-card"><blockquote>The rare engineer who can make a technical decision feel like a design decision.</blockquote><cite>Creative director / Nairobi</cite></article><article class="testimonial-card"><blockquote>Every interaction had a purpose, and every handoff made the next step clearer.</blockquote><cite>Founder / New York</cite></article><article class="testimonial-card"><blockquote>Calm, precise, and unusually attentive to the details users actually notice.</blockquote><cite>Engineering lead / Remote</cite></article><article class="testimonial-card"><blockquote>He made a complex system feel simple enough to trust and powerful enough to grow.</blockquote><cite>Operations director / Nairobi</cite></article></div><div class="slider-controls"><button class="slider-button" data-slider-action="prev" data-slider-target="testimonials" aria-label="Previous testimonial"><i data-lucide="arrow-left"></i></button><button class="slider-button" data-slider-action="next" data-slider-target="testimonials" aria-label="Next testimonial"><i data-lucide="arrow-right"></i></button></div></div></div>`;
 
+  const testimonialSlider = testimonials.querySelector('.content-slider');
+  const testimonialLayout = document.createElement('div');
+  testimonialLayout.className = 'testimonial-layout';
+  const testimonialVisual = document.createElement('div');
+  testimonialVisual.className = 'testimonial-visual';
+  testimonialVisual.innerHTML = '<span class="testimonial-quote testimonial-quote--top">“</span><img src="static/assets/logo-1024.png" alt="Jason Ocholla logo" loading="lazy"><span class="testimonial-quote testimonial-quote--bottom">”</span>';
+  testimonialSlider?.parentNode.insertBefore(testimonialLayout, testimonialSlider);
+  testimonialLayout.append(testimonialVisual, testimonialSlider);
+
   const faqs = document.createElement('section');
   faqs.id = 'faqs';
   faqs.className = 'content-section content-section--cream';

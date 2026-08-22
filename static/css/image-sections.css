@@ -9,7 +9,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: linear-gradient(90deg, rgba(247, 241, 232, .97) 0%, rgba(247, 241, 232, .88) 42%, rgba(247, 241, 232, .34) 76%, rgba(247, 241, 232, .08) 100%), url('../assets/hero.jpg') right 35% center / contain no-repeat;
+  background: linear-gradient(90deg, rgba(247, 241, 232, .97) 0%, rgba(247, 241, 232, .88) 42%, rgba(247, 241, 232, .34) 76%, rgba(247, 241, 232, .08) 100%), url('../assets/hero-background.png') right 35% center / contain no-repeat;
 }
 
 .hero-section::after {

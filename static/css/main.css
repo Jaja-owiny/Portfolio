@@ -80,11 +80,26 @@ textarea {
   box-shadow: 0 8px 30px rgba(84, 33, 44, 0.06);
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
-.brand span,
+.brand-logo {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 1.55rem;
+  height: 1.55rem;
+}
+.brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.brand-name span,
 em {
   color: var(--maroon);
 }
@@ -421,6 +436,43 @@ em {
 .project-list {
   border-top: 1px solid var(--line);
 }
+.testimonial-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: center;
+}
+.testimonial-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 24rem;
+  padding: 3rem;
+}
+.testimonial-visual img {
+  display: block;
+  width: min(100%, 18rem);
+  height: auto;
+  object-fit: contain;
+}
+.testimonial-quote {
+  position: absolute;
+  color: var(--maroon);
+  font-family: "Playfair Display", serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  line-height: 0.7;
+}
+.testimonial-quote--top {
+  top: 1rem;
+  right: 1rem;
+}
+.testimonial-quote--bottom {
+  bottom: 1rem;
+  left: 1rem;
+}
+.testimonial-layout .content-slider {
+  min-width: 0;
+}
 .project-row {
   display: grid;
   grid-template-columns: 4rem 1fr auto 2rem;
@@ -745,6 +797,25 @@ em {
   }
   .proficiency-grid {
     grid-template-columns: 1fr;
+  }
+  .testimonial-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .testimonial-visual {
+    min-height: 16rem;
+    padding: 2rem;
+  }
+  .testimonial-visual img {
+    width: min(100%, 12rem);
+  }
+  .testimonial-quote--top {
+    top: 0.5rem;
+    right: 1rem;
+  }
+  .testimonial-quote--bottom {
+    bottom: 0.5rem;
+    left: 1rem;
   }
   .project-row {
     grid-template-columns: 2rem 1fr 2rem;
