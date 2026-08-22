@@ -281,6 +281,38 @@
                 </article>
               </div>
             </div>
+            <div class="col-12 proficiency-section">
+              <div class="proficiency-heading reveal">
+                <div>
+                  <p class="eyebrow eyebrow-light">
+                    <span></span> Programming proficiency
+                  </p>
+                  <h2 class="section-title section-title-light">
+                    Tools I use to make ideas <em>real.</em>
+                  </h2>
+                </div>
+                <p class="muted-copy">
+                  A practical range of languages, frameworks, and tools shaped
+                  by the work I ship.
+                </p>
+              </div>
+              <div class="proficiency-grid">
+                <div class="proficiency-column">
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>Python</span><span>90%</span></div><div class="proficiency-track" role="progressbar" aria-label="Python proficiency" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><span style="width: 90%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>HTML</span><span>95%</span></div><div class="proficiency-track" role="progressbar" aria-label="HTML proficiency" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"><span style="width: 95%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>CSS</span><span>92%</span></div><div class="proficiency-track" role="progressbar" aria-label="CSS proficiency" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"><span style="width: 92%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>JavaScript</span><span>90%</span></div><div class="proficiency-track" role="progressbar" aria-label="JavaScript proficiency" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><span style="width: 90%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>React</span><span>86%</span></div><div class="proficiency-track" role="progressbar" aria-label="React proficiency" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"><span style="width: 86%"></span></div></div>
+                </div>
+                <div class="proficiency-column">
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>SQLite</span><span>82%</span></div><div class="proficiency-track" role="progressbar" aria-label="SQLite proficiency" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"><span style="width: 82%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>PostgreSQL</span><span>84%</span></div><div class="proficiency-track" role="progressbar" aria-label="PostgreSQL proficiency" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><span style="width: 84%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>Git / GitHub</span><span>88%</span></div><div class="proficiency-track" role="progressbar" aria-label="Git and GitHub proficiency" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"><span style="width: 88%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>AI / LLMs</span><span>84%</span></div><div class="proficiency-track" role="progressbar" aria-label="AI and large language model proficiency" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><span style="width: 84%"></span></div></div>
+                  <div class="proficiency-item reveal"><div class="proficiency-label"><span>AI Agents</span><span>80%</span></div><div class="proficiency-track" role="progressbar" aria-label="AI Agents proficiency" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><span style="width: 80%"></span></div></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -584,22 +616,7 @@
                     ></textarea>
                   </div>
                   <div class="col-12 captcha-row">
-                    <div id="captcha-container">
-                      <span id="captcha-code">8F2C</span
-                      ><button
-                        type="button"
-                        onclick="generateCaptcha()"
-                        aria-label="Refresh captcha"
-                      >
-                        <i data-lucide="refresh-cw"></i>
-                      </button>
-                    </div>
-                    <input
-                      type="text"
-                      id="captcha-input"
-                      required
-                      placeholder="Enter the code"
-                    />
+                    <div class="h-captcha" data-captcha="true"></div>
                   </div>
                   <div class="col-12">
                     <button
@@ -631,5 +648,6 @@
     <script src="static/js/social-links.js"></script>
     <script src="static/js/projects.js"></script>
     <script src="static/js/content-sections.js"></script>
+    <script src="https://web3forms.com/client/script.js" async defer></script>
   </body>
 </html>
