@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="static/css/content-sections.css" />
     <link rel="stylesheet" href="static/css/carousel-fix.css" />
     <link rel="stylesheet" href="static/css/projects.css" />
+    <link rel="stylesheet" href="static/css/tech-carousel.css" />
   </head>
   <body>
     <div class="paper-grain" aria-hidden="true"></div>
@@ -393,8 +394,7 @@
             <div>
               <p class="eyebrow"><span></span> Selected work</p>
               <h2 class="section-title reveal">Made to be <em>used.</em></h2>
-            </div>
-            <p class="section-index d-none d-md-block">02 / 06</p>
+            </div>            
           </div>
           <div class="project-list project-cards">
             <article class="project-card reveal">
@@ -553,9 +553,34 @@
           </div>
         </div>
       </section>
-      <section id="experience" class="section-pad section-white">
-        
+      <section id="tech-stack" class="tech-stack-section" aria-labelledby="tech-stack-title">
+        <div class="tech-carousel" aria-label="Technology stack">
+          <div class="tech-carousel__track">
+            <div class="tech-carousel__group">
+              <a class="tech-logo" href="https://react.dev" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/react/61DAFB" alt="" /><span>React</span></a>
+              <a class="tech-logo" href="https://nextjs.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/nextdotjs/000000" alt="" /><span>Next.js</span></a>
+              <a class="tech-logo" href="https://tailwindcss.com" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="" /><span>Tailwind</span></a>
+              <a class="tech-logo" href="https://greensock.com/gsap" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/greensock/88CE02" alt="" /><span>GSAP</span></a>
+              <a class="tech-logo" href="https://www.python.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/python/3776AB" alt="" /><span>Python</span></a>
+              <a class="tech-logo" href="https://fastapi.tiangolo.com" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/fastapi/009688" alt="" /><span>FastAPI</span></a>
+              <a class="tech-logo" href="https://nodejs.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="" /><span>Node.js</span></a>
+              <a class="tech-logo" href="https://www.postgresql.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/postgresql/4169E1" alt="" /><span>PostgreSQL</span></a>
+              <a class="tech-logo" href="#terminal"><span class="tech-logo__mark tech-logo__mark--websocket">W</span><span>WebSockets</span></a>
+              <a class="tech-logo" href="https://www.sqlite.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/sqlite/003B57" alt="" /><span>SQLite</span></a>
+              <a class="tech-logo" href="https://git-scm.com" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/git/F05032" alt="" /><span>Git</span></a>
+              <a class="tech-logo" href="https://www.anthropic.com/claude-code" target="_blank" rel="noreferrer"><span class="tech-logo__mark tech-logo__mark--claude">C</span><span>Claude Code</span></a>
+              <a class="tech-logo" href="https://github.com" target="_blank" rel="noreferrer"><span class="tech-logo__mark tech-logo__mark--hermes">H</span><span>Hermes</span></a>
+              <a class="tech-logo" href="https://threejs.org" target="_blank" rel="noreferrer"><img src="https://cdn.simpleicons.org/threedotjs/000000" alt="" /><span>Three.js</span></a>
+              <a class="tech-logo" href="https://www.khronos.org/glsl" target="_blank" rel="noreferrer"><span class="tech-logo__mark tech-logo__mark--glsl">G</span><span>GLSL</span></a>
+              <a class="tech-logo" href="https://www.mql5.com" target="_blank" rel="noreferrer"><span class="tech-logo__mark tech-logo__mark--mql">M</span><span>MQL5</span></a>
+              <a class="tech-logo" href="#terminal"><span class="tech-logo__mark tech-logo__mark--llm">L</span><span>AI / LLMs</span></a>
+              <a class="tech-logo" href="#terminal"><span class="tech-logo__mark tech-logo__mark--ai">AI</span><span>AI Agents</span></a>
+            </div>
+            <div class="tech-carousel__group" aria-hidden="true"></div>
+          </div>
+        </div>
       </section>
+  
       <section id="contact" class="section-pad section-cream">
         <div class="container-xxl px-4 px-xl-5">
           <div class="row g-5">
@@ -687,6 +712,7 @@
     <script src="static/js/social-links.js"></script>
     <script src="static/js/projects.js"></script>
     <script src="static/js/content-sections.js"></script>
+    <script src="static/js/tech-carousel.js"></script>
     <script src="https://web3forms.com/client/script.js" async defer></script>
   </body>
 </html>

@@ -1,0 +1,119 @@
+.tech-stack-section {
+  padding: 5rem 0 5.5rem;
+  overflow: hidden;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.tech-stack-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.8rem;
+}
+
+.tech-stack-heading h2 {
+  margin: 0;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: .98;
+}
+
+.tech-carousel {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.tech-carousel__track {
+  display: flex;
+  width: max-content;
+  animation: tech-scroll 42s linear infinite;
+}
+
+.tech-carousel__group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+.tech-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .75rem;
+  min-width: 10.5rem;
+  padding: .95rem 1.15rem;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: var(--cream);
+  transition: color .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.tech-logo:hover,
+.tech-logo:focus-visible {
+  color: var(--maroon);
+  border-color: var(--maroon);
+  transform: translateY(-4px);
+}
+
+.tech-logo img,
+.tech-logo__mark {
+  width: 1.8rem;
+  height: 1.8rem;
+  flex: 0 0 1.8rem;
+  filter: grayscale(1);
+  transition: filter .25s ease;
+}
+
+.tech-logo:hover img,
+.tech-logo:focus-visible img,
+.tech-logo:hover .tech-logo__mark,
+.tech-logo:focus-visible .tech-logo__mark {
+  filter: grayscale(0);
+}
+
+.tech-logo__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  border: 2px solid currentColor;
+  border-radius: .35rem;
+  font: 700 .8rem/1 "DM Mono", monospace;
+}
+
+.tech-logo__mark--claude { color: #d97757; }
+.tech-logo__mark--hermes { color: #7b61ff; }
+.tech-logo__mark--glsl { color: #5586a4; }
+.tech-logo__mark--mql { color: #00a3e0; }
+.tech-logo__mark--websocket { color: #4353ff; }
+.tech-logo__mark--llm { color: #e06c2f; }
+.tech-logo__mark--ai { color: var(--maroon); }
+
+.tech-logo span:last-child {
+  white-space: nowrap;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+@keyframes tech-scroll {
+  to { transform: translateX(-50%); }
+}
+
+.tech-carousel:hover .tech-carousel__track,
+.tech-carousel:focus-within .tech-carousel__track {
+  animation-play-state: paused;
+}
+
+@media (max-width: 767px) {
+  .tech-stack-section { padding: 4rem 0 4.5rem; }
+  .tech-stack-heading { display: block; margin-bottom: 2rem; }
+  .tech-stack-heading h2 { margin-top: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-carousel__track { animation: none; }
+}
