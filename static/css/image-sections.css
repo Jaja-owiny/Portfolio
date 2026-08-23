@@ -39,8 +39,12 @@
   background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .2)), url('../assets/about.jpg');
 }
 
-#experience .col-lg-4::after {
-  background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .18)), url('../assets/path.jpg');
+#about .about-story-image--path::after {
+  background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .2)), url('../assets/field1.jpg');
+}
+
+#about .about-story-image--beyond::after {
+  background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .2)), url('../assets/field2.jpg');
 }
 
 @media (max-width: 991px) {
