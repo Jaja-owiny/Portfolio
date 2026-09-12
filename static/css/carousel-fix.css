@@ -21,9 +21,43 @@
   .content-track[data-slider="blog"],
   .content-track[data-slider="testimonials"] {
     grid-auto-columns: 88%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
-
+  
+  .content-track[data-slider="blog"]::-webkit-scrollbar,
+  .content-track[data-slider="testimonials"]::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .content-track[data-slider="blog"] .content-card,
+  .content-track[data-slider="testimonials"] .testimonial-card {
+    scroll-snap-align: start;
+  }
+  
   .content-track[data-slider="testimonials"] {
-    grid-auto-columns: 100%;
+    grid-auto-columns: 92%;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-track[data-slider="blog"],
+  .content-track[data-slider="testimonials"] {
+    grid-auto-columns: 92%;
+    gap: 0.75rem;
+  }
+  
+  .content-track[data-slider="testimonials"] {
+    grid-auto-columns: 96%;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .content-track[data-slider="blog"],
+  .content-track[data-slider="testimonials"] {
+    scroll-snap-type: x mandatory;
   }
 }

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Notes from the studio — Jason Ocholla">
+  <title id="page-title">Reading — Jason Ocholla</title>
+  <link rel="icon" type="image/png" href="static/assets/favicon.ico" loading="lazy" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" href="static/css/navigation.css">
+  <link rel="stylesheet" href="static/css/navigation-fix.css">
+  <link rel="stylesheet" href="static/css/blog.css">
+</head>
+<body>
+
+  <div class="paper-grain" aria-hidden="true"></div>
+  <div class="parallax-orb orb-one" data-parallax=".14" aria-hidden="true"></div>
+  <div class="parallax-orb orb-two" data-parallax="-.09" aria-hidden="true"></div>
+
+  <!-- Minimal nav -->
+  <header class="site-header" id="site-header">
+    <nav class="blog-nav" aria-label="Blog navigation">
+      <a class="brand brand-pill" href="index.html">J<span>.</span>OCHOLLA</a>
+      <a class="blog-back-link" href="index.html#blog">
+        <i data-lucide="arrow-left"></i>
+        All notes
+      </a>
+      <div class="blog-progress-wrap">
+        <div class="blog-progress-bar" id="reading-progress"></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="blog-main">
+
+    <!-- HERO — full-bleed with image -->
+    <div class="blog-hero" id="blog-hero">
+      <div class="blog-hero__image-wrap">
+        <img id="hero-image" class="blog-hero__img" src="" alt="" loading="eager">
+        <div class="blog-hero__overlay"></div>
+      </div>
+      <div class="blog-hero__content">
+        <div class="blog-hero__meta">
+          <span class="blog-tag" id="hero-tag">—</span>
+          <span class="blog-date" id="hero-date">—</span>
+          <span class="blog-read-time" id="hero-read-time">—</span>
+        </div>
+        <h1 class="blog-hero__title" id="hero-title">Loading&hellip;</h1>
+        <p class="blog-hero__lede" id="hero-lede"></p>
+      </div>
+      <div class="blog-hero__rule"></div>
+    </div>
+
+    <!-- BODY -->
+    <div class="blog-body">
+
+      <!-- Sticky sidebar -->
+      <aside class="blog-sidebar" id="blog-sidebar">
+        <div class="blog-sidebar__inner">
+          <p class="blog-sidebar__label">Written by</p>
+          <p class="blog-sidebar__author">Jason Ocholla</p>
+
+          <p class="blog-sidebar__label">Filed under</p>
+          <p class="blog-sidebar__cat" id="sidebar-tag">—</p>
+
+          <p class="blog-sidebar__label">Published</p>
+          <p class="blog-sidebar__date" id="sidebar-date">—</p>
+
+          <p class="blog-sidebar__label">Read time</p>
+          <p class="blog-sidebar__rt" id="sidebar-rt">—</p>
+
+          <div class="blog-sidebar__divider"></div>
+
+          <p class="blog-sidebar__label">Share</p>
+          <div class="blog-share">
+            <button class="blog-share__btn" id="share-copy" title="Copy link">
+              <i data-lucide="link"></i>
+            </button>
+            <a class="blog-share__btn" id="share-twitter" href="#" target="_blank" rel="noopener" title="Share on X">
+              <i data-lucide="twitter"></i>
+            </a>
+          </div>
+
+          <div class="blog-sidebar__divider"></div>
+
+          <!-- TOC injected here by JS -->
+          <nav class="blog-toc" id="blog-toc" aria-label="Table of contents">
+            <p class="blog-sidebar__label">In this piece</p>
+            <ol class="blog-toc__list" id="toc-list"></ol>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Article body -->
+      <article class="blog-article" id="blog-article">
+        <!-- MD rendered here -->
+        <div class="blog-article__body prose" id="article-body">
+          <div class="blog-skeleton">
+            <div class="skel skel--h2"></div>
+            <div class="skel skel--p"></div>
+            <div class="skel skel--p short"></div>
+            <div class="skel skel--h3"></div>
+            <div class="skel skel--p"></div>
+            <div class="skel skel--p short"></div>
+          </div>
+        </div>
+
+        <!-- Footer within article -->
+        <footer class="blog-article__footer">
+          <div class="blog-article__footer-grid">
+            <div>
+              <p class="blog-sidebar__label">Continue reading</p>
+              <div class="blog-adjacent" id="adjacent-posts">
+                <!-- Injected by JS -->
+              </div>
+            </div>
+            <a class="blog-cta" href="index.html#contact">
+              Start a conversation
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+          </div>
+        </footer>
+      </article>
+    </div>
+
+  </main>
+
+  <!-- Error state -->
+  <div class="blog-error hidden" id="blog-error">
+    <div class="blog-error__inner">
+      <p class="blog-error__code">404</p>
+      <h2>Post not found.</h2>
+      <p>The article you're looking for doesn't exist or hasn't been published yet.</p>
+      <a class="button button-dark" href="index.html#blog">Back to notes <i data-lucide="arrow-left"></i></a>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="blog-footer-inner">
+      <span class="brand">J<span>.</span>OCHOLLA</span>
+      <span>© 2026 · Built with care and a little curiosity.</span>
+      <a href="#blog-hero">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="static/js/blog.js"></script>
+</body>
+</html>

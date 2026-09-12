@@ -13,13 +13,27 @@
     menu.classList.toggle('open', open);
     header.classList.toggle('menu-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
     menu.setAttribute('aria-hidden', String(!open));
+
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = open ? 'hidden' : '';
   };
 
-  menuToggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menuToggle.addEventListener('click', (event) => {
+    event.preventDefault();
+    setMenu(!menu.classList.contains('open'));
+  });
   menu.querySelectorAll('.mobile-nav-link').forEach((link) => link.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setMenu(false);
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (event) => {
+    if (menu.classList.contains('open') && !menu.contains(event.target) && !menuToggle.contains(event.target)) {
+      setMenu(false);
+    }
   });
 
   const updateHeader = () => {

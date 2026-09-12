@@ -57,12 +57,36 @@
 
 @media (max-width: 767px) {
   .hero-section::before {
-    background: linear-gradient(180deg, rgba(247, 241, 232, .9) 0%, rgba(247, 241, 232, .78) 58%, rgba(247, 241, 232, .52) 100%), url('../assets/hero.jpg') center bottom / contain no-repeat;
+    background: linear-gradient(180deg, rgba(247, 241, 232, .9) 0%, rgba(247, 241, 232, .78) 58%, rgba(247, 241, 232, .52) 100%), url('../assets/hero-background.png') center bottom / contain no-repeat;
   }
 
   #about .col-lg-4::after,
   #experience .col-lg-4::after {
     width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-top: 1rem;
+  }
+  
+  #about .col-lg-4,
+  #experience .col-lg-4 {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section::before {
+    background: linear-gradient(180deg, rgba(247, 241, 232, .95) 0%, rgba(247, 241, 232, .85) 45%, rgba(247, 241, 232, .6) 100%), url('../assets/hero-background.png') center bottom / cover no-repeat;
+  }
+  
+  #about .col-lg-4::after,
+  #experience .col-lg-4::after {
+    aspect-ratio: 16 / 10;
+    border-radius: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  
+  .hero-section::after {
+    background: linear-gradient(180deg, rgba(247, 241, 232, .15), transparent 40%, rgba(247, 241, 232, .2));
   }
 }
 

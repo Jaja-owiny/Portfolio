@@ -62,6 +62,7 @@
       data-parallax="-.09"
       aria-hidden="true"
     ></div>
+    
     <header class="site-header" id="site-header">
       <nav
         class="container-xxl d-flex align-items-center justify-content-between py-3 px-4 px-xl-5"
@@ -89,7 +90,8 @@
           >Start a conversation <i data-lucide="arrow-up-right"></i></a
         ><button
           id="menu-toggle"
-          class="menu-toggle"
+          class="menu-toggle" 
+          type="button"
           aria-label="Open navigation menu"
           aria-expanded="false"
           aria-controls="mobile-menu"
@@ -110,6 +112,7 @@
         ><a href="#contact" class="mobile-nav-link">Contact</a>
       </div>
     </header>
+
     <main class="content-wrapper">
       <section id="hero" class="hero-section section-pad">
         <div class="container-xxl px-4 px-xl-5">
@@ -153,6 +156,7 @@
           </div>
         </div>
       </section>
+
       <section id="about" class="section-pad section-white">
         <div class="container-xxl px-4 px-xl-5">
           <div class="row g-5">
@@ -177,8 +181,9 @@
             </div>
           </div>
         </div>
+
         <div class="container-xxl px-4 px-xl-5 about-followup">
-          <div class="row g-5 align-items-center about-story-row">            
+          <div class="row g-5 align-items-center about-story-row">                        
             <div class="col-lg-8">
               <p class="eyebrow"><span></span> The path</p>
               <div class="timeline">
@@ -217,7 +222,10 @@
             <div class="col-lg-4 about-story-image about-story-image--path reveal">
             </div>
           </div>
-          <div class="row g-5 align-items-center about-story-row">            
+        </div>
+        
+        <div class="container-xxl px-4 px-xl-5">
+          <div class="row g-5 align-items-center about-story-row about-story-row--second">
             <div class="col-lg-4 about-story-image about-story-image--beyond reveal">
             </div>
             <div class="col-lg-8">
@@ -229,7 +237,7 @@
               <p class="lead-copy reveal">
                 Away from the screen, I make room for reading, long walks, and conversations that challenge an assumption. Those habits keep my work observant, patient, and grounded in the people it is meant to serve.
               </p>
-            </div>            
+            </div>                        
           </div>
         </div>
       </section>
@@ -304,6 +312,7 @@
           </div>
         </div>
       </section>
+
       <section id="skills" class="section-pad section-maroon text-white">
         <div class="container-xxl px-4 px-xl-5">
           <div class="row g-5">
@@ -388,6 +397,7 @@
           </div>
         </div>
       </section>
+
       <section id="projects" class="section-pad section-cream">
         <div class="container-xxl px-4 px-xl-5">
           <div class="d-flex justify-content-between align-items-end mb-5">
@@ -553,6 +563,7 @@
           </div>
         </div>
       </section>
+
       <section id="tech-stack" class="tech-stack-section" aria-labelledby="tech-stack-title">
         <div class="tech-carousel" aria-label="Technology stack">
           <div class="tech-carousel__track">
@@ -687,7 +698,19 @@
           </div>
         </div>
       </section>
+
     </main>
+
+    <button
+      class="back-to-top"
+      id="back-to-top"
+      type="button"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      <i data-lucide="arrow-up"></i>
+    </button>
+
     <footer class="site-footer">
       <div
         class="container-xxl px-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between gap-3"
@@ -703,10 +726,10 @@
           </picture>
           <span class="brand-name">J<span>.</span>OCHOLLA</span>
         </span
-        ><span>© 2026 · Built with care and a little curiosity.</span
-        ><a href="#hero">Back to top ↑</a>
+        ><span>© 2026 · Built with care and a little curiosity.</span>
       </div>
     </footer>
+
     <script src="static/js/main.js"></script>
     <script src="static/js/navigation.js"></script>
     <script src="static/js/social-links.js"></script>
@@ -714,5 +737,6 @@
     <script src="static/js/content-sections.js"></script>
     <script src="static/js/tech-carousel.js"></script>
     <script src="https://web3forms.com/client/script.js" async defer></script>
+
   </body>
 </html>

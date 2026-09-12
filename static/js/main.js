@@ -1,22 +1,9 @@
 (() => {
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (window.lucide) lucide.createIcons();
-  const header = document.getElementById("site-header"),
-    toggle = document.getElementById("menu-toggle"),
-    menu = document.getElementById("mobile-menu");
-  toggle?.addEventListener("click", () => {
-    const open = menu.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", open);
-    menu.setAttribute("aria-hidden", !open);
-    toggle.innerHTML = `<i data-lucide="${open ? "x" : "menu"}"></i>`;
-    lucide.createIcons();
-  });
-  document.querySelectorAll(".mobile-nav-link").forEach((a) =>
-    a.addEventListener("click", () => {
-      menu.classList.remove("open");
-      toggle?.setAttribute("aria-expanded", "false");
-    }),
-  );
+  
+  const about = document.getElementById("about");
+  const backToTop = document.getElementById("back-to-top");
   const observer = new IntersectionObserver(
     (entries) =>
       entries.forEach((e) => {
@@ -33,7 +20,7 @@
     ticking = false;
   const motion = () => {
     ticking = false;
-    header?.classList.toggle("scrolled", y > 24);
+    backToTop?.classList.toggle("is-visible", about && about.getBoundingClientRect().bottom <= 0);
     if (!reduced)
       items.forEach((e) => {
         const n = Number(e.dataset.parallax) || 0;
@@ -52,6 +39,9 @@
     { passive: true },
   );
   motion();
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+  });
   const commands = {
     help: `Available shell systems:\n  - about       View profile and working principles\n  - skills      Inspect core proficiencies\n  - projects    Enumerate active projects\n  - mql5        Review Valkyrie EA status\n  - clear       Wipe terminal logs\n  - contact     Open the communication channel`,
     about: `================ JASON OCHOLLA PROFILE ================\nNAME        : Jason Ocholla\nROLE        : Senior Software & Web Engineer\nEXPERTISE   : Frontend, backend APIs, interactive web\nLOCATION    : Nairobi / Remote\nMOTTO       : Make complex things feel clear`,

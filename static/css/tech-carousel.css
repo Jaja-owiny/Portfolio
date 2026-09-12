@@ -109,9 +109,60 @@
 }
 
 @media (max-width: 767px) {
-  .tech-stack-section { padding: 4rem 0 4.5rem; }
-  .tech-stack-heading { display: block; margin-bottom: 2rem; }
-  .tech-stack-heading h2 { margin-top: 1.5rem; }
+  .tech-stack-section { 
+    padding: 4rem 0 4.5rem; 
+  }
+  .tech-stack-heading { 
+    display: block; 
+    margin-bottom: 2rem; 
+  }
+  .tech-stack-heading h2 { 
+    margin-top: 1.5rem; 
+  }
+  
+  .tech-carousel {
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+  
+  .tech-logo {
+    min-width: 9rem;
+    padding: 0.85rem 1rem;
+    gap: 0.6rem;
+  }
+  
+  .tech-logo img,
+  .tech-logo__mark {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: 0 0 1.5rem;
+  }
+  
+  .tech-logo span:last-child {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tech-stack-section {
+    padding: 3.5rem 0 4rem;
+  }
+  
+  .tech-logo {
+    min-width: 8rem;
+    padding: 0.75rem 0.85rem;
+    gap: 0.5rem;
+  }
+  
+  .tech-logo img,
+  .tech-logo__mark {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex: 0 0 1.35rem;
+  }
+  
+  .tech-logo span:last-child {
+    font-size: 0.65rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
