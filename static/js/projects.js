@@ -33,7 +33,8 @@
     };
   
   document.querySelectorAll("[data-project-image]").forEach((button) =>
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       image.src = button.dataset.projectImage;
       image.alt = `Fullscreen view of ${button.dataset.projectTitle}`;
       title.textContent = button.dataset.projectTitle;
@@ -44,6 +45,21 @@
       closeButton?.focus();
     }),
   );
+
+  cards.forEach((card) => {
+    const media = card.querySelector(".project-card__media");
+    if (!media) return;
+
+    media.addEventListener("click", (event) => {
+      if (!matchMedia("(hover: none) and (pointer: coarse)").matches) return;
+      if (event.target.closest(".project-card__action")) return;
+
+      cards.forEach((otherCard) => {
+        if (otherCard !== card) otherCard.classList.remove("is-tapped");
+      });
+      card.classList.toggle("is-tapped");
+    });
+  });
   
   modal
     .querySelectorAll("[data-project-modal-close]")

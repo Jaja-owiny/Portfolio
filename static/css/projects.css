@@ -381,6 +381,12 @@
     opacity: 1;
     pointer-events: auto;
   }
+
+  .project-card.is-tapped .project-card__overlay {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
   
   .project-card__action {
     -webkit-tap-highlight-color: transparent;
