@@ -18,6 +18,7 @@
 </head>
 <body>
 
+
   <div class="paper-grain" aria-hidden="true"></div>
   <div class="parallax-orb orb-one" data-parallax=".14" aria-hidden="true"></div>
   <div class="parallax-orb orb-two" data-parallax="-.09" aria-hidden="true"></div>
@@ -25,7 +26,15 @@
   <!-- Minimal nav -->
   <header class="site-header" id="site-header">
     <nav class="blog-nav" aria-label="Blog navigation">
-      <a class="brand brand-pill" href="index.html">J<span>.</span>OCHOLLA</a>
+      <a class="brand brand-pill" href="index.html#hero">
+        <picture class="brand-logo" aria-hidden="true">
+          <source media="(max-width: 400px)" srcset="static/assets/icon-16x16.png" />
+          <source media="(max-width: 767px)" srcset="static/assets/icon-32x32.png" />
+          <source media="(max-width: 1199px)" srcset="static/assets/icon-48x48.png" />
+          <img src="static/assets/icon-192x192.png" alt="Personal Brand Logo" width="32" height="32" />
+        </picture>
+        <span class="brand-name">J<span>.</span>OCHOLLA</span>
+      </a>
       <a class="blog-back-link" href="index.html#blog">
         <i data-lucide="arrow-left"></i>
         All notes
@@ -82,8 +91,8 @@
               <i data-lucide="link"></i>
             </button>
             <a class="blog-share__btn" id="share-twitter" href="#" target="_blank" rel="noopener" title="Share on X">
-              <i data-lucide="twitter"></i>
-            </a>
+              <i data-lucide="X"></i>
+            </a>            
           </div>
 
           <div class="blog-sidebar__divider"></div>
@@ -140,11 +149,32 @@
     </div>
   </div>
 
+  <button
+    class="back-to-top"
+    id="back-to-top"
+    type="button"
+    aria-label="Back to top"
+    title="Back to top"
+  >
+    <i data-lucide="arrow-up"></i>
+  </button>
+
   <footer class="site-footer">
-    <div class="blog-footer-inner">
-      <span class="brand">J<span>.</span>OCHOLLA</span>
-      <span>© 2026 · Built with care and a little curiosity.</span>
-      <a href="#blog-hero">Back to top ↑</a>
+    <div
+      class="container-xxl px-4 px-xl-5 d-flex flex-column flex-md-row justify-content-between gap-3"
+    >
+      <span class="brand">
+        <picture class="brand-logo" aria-hidden="true">
+          <img
+            src="static/assets/footer-logo-white-512.png"
+            alt=""
+            width="32"
+            height="32"
+          />
+        </picture>
+        <span class="brand-name">J<span>.</span>OCHOLLA</span>
+      </span
+      ><span>© 2026 · Built with care and a little curiosity.</span>
     </div>
   </footer>
 

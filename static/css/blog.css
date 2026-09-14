@@ -9,8 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
-  padding: .9rem 2rem;
+  gap: clamp(.8rem, 3vw, 1.5rem);
+  padding: .9rem clamp(1rem, 4vw, 2rem);
   pointer-events: auto;
 }
 
@@ -91,7 +91,7 @@
   max-width: 900px;
   margin: 0 auto;
   width: 100%;
-  padding: 0 2rem 4.5rem;
+  padding: 0 clamp(1rem, 4vw, 2rem) 4.5rem;
 }
 
 .blog-hero__meta {
@@ -153,7 +153,7 @@
   grid-template-areas: "sidebar article";
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 4vw, 2rem);
   gap: 0;
   border-left: 1px solid var(--line);
   border-right: 1px solid var(--line);
@@ -279,9 +279,11 @@
 /* Prose typography — the reading experience */
 .prose {
   max-width: 68ch;
+  min-width: 0;
   color: var(--ink);
   font-size: 1.05rem;
   line-height: 1.78;
+  overflow-wrap: anywhere;
 }
 
 .prose h2 {
@@ -370,7 +372,7 @@
 
 .prose pre {
   margin: 2rem 0;
-  padding: 1.6rem;
+  padding: clamp(1rem, 3vw, 1.6rem);
   background: var(--ink);
   border-left: 4px solid var(--maroon);  /* brutalist: exposed edge */
   overflow-x: auto;
@@ -397,6 +399,32 @@
   height: auto;
   margin: 2.5rem 0;
   border-left: 4px solid var(--maroon);  /* brutalist structural edge */
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  margin: 2rem 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  min-width: 8rem;
+  padding: .7rem .85rem;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.prose th {
+  color: var(--cream);
+  background: var(--ink);
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
 .prose figcaption,
@@ -525,18 +553,6 @@
   margin-bottom: 2rem;
 }
 
-/* FOOTER ------------------------------------------------------- */
-.blog-footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 /* SCROLL ANIMATIONS -------------------------------------------- */
 .blog-hero__content,
 .blog-hero__meta {
@@ -596,7 +612,7 @@
     position: static;
     padding-top: 2.5rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: start;
     gap: 0 2rem;
   }
@@ -610,20 +626,58 @@
 }
 
 @media (max-width: 640px) {
-  .blog-hero { min-height: 70vh; }
+  .blog-hero {
+    min-height: min(70vh, 42rem);
+  }
+
+  .blog-hero__image-wrap {
+    inset: 0;
+  }
+
+  .blog-hero__img {
+    object-position: 58% 30%;
+  }
 
   .blog-hero__title {
     font-size: clamp(2.4rem, 11vw, 3.5rem);
   }
 
-  .blog-hero__content { padding-bottom: 3.5rem; }
+  .blog-hero__content {
+    padding-bottom: 3.5rem;
+  }
+
+  .blog-hero__meta {
+    flex-wrap: wrap;
+    gap: .55rem .9rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .blog-hero__lede {
+    font-size: .95rem;
+    line-height: 1.5;
+  }
 
   .blog-nav { padding: .85rem 1.2rem; }
 
-  .blog-footer-inner { flex-direction: column; text-align: center; }
+  .blog-nav .brand {
+    font-size: .78rem;
+  }
+
+  .blog-back-link {
+    font-size: .6rem;
+    letter-spacing: .06em;
+  }
 
   .blog-sidebar__inner {
     grid-template-columns: 1fr 1fr;
+    gap: 0 1.25rem;
+  }
+
+  .blog-sidebar__author,
+  .blog-sidebar__cat,
+  .blog-sidebar__date,
+  .blog-sidebar__rt {
+    margin-bottom: 1.1rem;
   }
 
   .prose p:first-child::first-letter { all: unset; }
@@ -633,6 +687,36 @@
   }
 
   .blog-cta { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 400px) {
+  .blog-body {
+    padding: 0 .9rem;
+  }
+
+  .blog-hero__title {
+    font-size: 2.25rem;
+  }
+
+  .blog-sidebar__inner {
+    display: block;
+  }
+
+  .blog-sidebar__label {
+    margin-top: 1rem;
+  }
+
+  .blog-sidebar__label:first-child {
+    margin-top: 0;
+  }
+
+  .blog-sidebar__divider {
+    margin: 1.25rem 0;
+  }
+
+  .blog-share {
+    margin-bottom: 1.25rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

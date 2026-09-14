@@ -201,6 +201,24 @@
     }, { passive: true });
   }
 
+  /* ── Back-to-top control ─────────────────────────────────── */
+
+  function initBackToTop() {
+    const button = $('#back-to-top');
+    if (!button) return;
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const update = () => {
+      button.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.35);
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    button.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    });
+    update();
+  }
+
   /* ── Main renderer ────────────────────────────────────────── */
 
   async function render() {
@@ -300,6 +318,7 @@
     if (window.lucide) lucide.createIcons();
     initProgress();
     initHeader();
+    initBackToTop();
     render();
   });
 
