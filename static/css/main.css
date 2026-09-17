@@ -473,13 +473,16 @@ em {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 24rem;
-  padding: 3rem;
+  min-width: 0;
+  min-height: clamp(16rem, 35vw, 24rem);
+  padding: clamp(1.5rem, 5vw, 3rem);
 }
 .testimonial-visual img {
   display: block;
-  width: min(100%, 18rem);
+  width: clamp(8rem, 70%, 18rem);
+  max-width: 100%;
   height: auto;
+  aspect-ratio: 1;
   object-fit: contain;
 }
 .testimonial-quote {
@@ -862,6 +865,22 @@ em {
   }
 }
 
+@media (max-width: 767px) {
+  .testimonial-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .testimonial-visual {
+    min-height: clamp(14rem, 60vw, 20rem);
+    padding: 1rem;
+  }
+
+  .testimonial-visual img {
+    width: clamp(8rem, 50vw, 16rem);
+  }
+}
+
 /* ========================================
    MOBILE-FIRST RESPONSIVE ENHANCEMENTS
    ======================================== */
@@ -1204,6 +1223,28 @@ em {
   .about-story-image img {
     min-height: 16rem;
     height: auto;
+  }
+
+  .about-story-row > .col-lg-8 {
+    display: contents;
+  }
+
+  .about-story-row > .about-story-image {
+    order: 2;
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .about-story-row > .col-lg-8 > .eyebrow {
+    flex: 0 0 100%;
+    order: 1;
+  }
+
+  .about-story-row > .col-lg-8 > .timeline,
+  .about-story-row > .col-lg-8 > .section-title,
+  .about-story-row > .col-lg-8 > .lead-copy {
+    flex: 0 0 100%;
+    order: 3;
   }
   
   .about-story-row--reverse .about-story-image {

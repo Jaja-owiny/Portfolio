@@ -25,7 +25,7 @@
 #experience .col-lg-4::after {
   content: '';
   display: block;
-  width: min(100%, 21rem);
+  width: 100%;
   aspect-ratio: 4 / 5;
   margin-top: 1.5rem;
   border-radius: 1.25rem;
@@ -40,7 +40,7 @@
 }
 
 #about .about-story-image--path::after {
-  background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .2)), url('../assets/field1.jpg');
+  background-image: linear-gradient(180deg, rgba(118, 47, 60, .04), rgba(23, 20, 20, .2)), url('../assets/Python_Code.png');
 }
 
 #about .about-story-image--beyond::after {
@@ -50,7 +50,7 @@
 @media (max-width: 991px) {
   #about .col-lg-4::after,
   #experience .col-lg-4::after {
-    width: min(100%, 18rem);
+    width: 100%;
     aspect-ratio: 16 / 9;
   }
 }

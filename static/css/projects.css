@@ -15,6 +15,47 @@
   display: none;
 }
 
+.projects-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: -1.5rem 0 2rem;
+}
+
+.projects-filter__button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: var(--ink);
+  background: transparent;
+  font: 500 0.68rem/1 "DM Mono", monospace;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.projects-filter__button:hover,
+.projects-filter__button:focus-visible,
+.projects-filter__button.is-active {
+  border-color: var(--maroon);
+  color: #fff;
+  background: var(--maroon);
+}
+
+.project-card.is-filtered-out {
+  display: none !important;
+}
+
+@media (max-width: 575px) {
+  .projects-filter {
+    margin-top: -1rem;
+  }
+
+  .projects-filter__button {
+    flex: 1 1 auto;
+    min-height: 44px;
+  }
+}
+
 .project-card {
   flex: 0 0 auto;
   width: calc((100% - 2.5rem) / 3); /* 3 cards visible on desktop */

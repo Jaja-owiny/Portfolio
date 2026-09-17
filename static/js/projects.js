@@ -22,6 +22,24 @@
     cardsContainer.parentElement.append(controls);
     if (window.lucide) lucide.createIcons();
   }
+
+  const filterButtons = [...document.querySelectorAll("[data-project-filter]")];
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.projectFilter;
+
+      filterButtons.forEach((filterButton) => {
+        const isActive = filterButton === button;
+        filterButton.classList.toggle("is-active", isActive);
+        filterButton.setAttribute("aria-pressed", String(isActive));
+      });
+
+      cards.forEach((card) => {
+        const isVisible = filter === "all" || card.dataset.projectCategory === filter;
+        card.classList.toggle("is-filtered-out", !isVisible);
+      });
+    });
+  });
   
   const closeButton = modal.querySelector(".project-modal__close"),
     close = () => {
