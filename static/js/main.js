@@ -3,6 +3,7 @@
   if (window.lucide) lucide.createIcons();
   
   const about = document.getElementById("about");
+  const footer = document.querySelector(".site-footer");
   const backToTop = document.getElementById("back-to-top");
   const observer = new IntersectionObserver(
     (entries) =>
@@ -20,7 +21,11 @@
     ticking = false;
   const motion = () => {
     ticking = false;
-    backToTop?.classList.toggle("is-visible", about && about.getBoundingClientRect().bottom <= 0);
+    const footerVisible = footer && footer.getBoundingClientRect().top < innerHeight;
+    backToTop?.classList.toggle(
+      "is-visible",
+      about && about.getBoundingClientRect().bottom <= 0 && !footerVisible,
+    );
     if (!reduced)
       items.forEach((e) => {
         const n = Number(e.dataset.parallax) || 0;

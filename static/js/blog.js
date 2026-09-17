@@ -208,8 +208,13 @@
     if (!button) return;
 
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const footer = document.querySelector('.site-footer');
     const update = () => {
-      button.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.35);
+      const footerVisible = footer && footer.getBoundingClientRect().top < window.innerHeight;
+      button.classList.toggle(
+        'is-visible',
+        window.scrollY > window.innerHeight * 0.35 && !footerVisible,
+      );
     };
 
     window.addEventListener('scroll', update, { passive: true });
